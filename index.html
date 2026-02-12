@@ -39,7 +39,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/drmowinckels/wbcmd/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/lcbc-uio/wbcmd/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -47,13 +47,79 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-Provides R wrapper functions for the 'Connectome Workbench' command-line tool ('wb_command'). Includes a central dispatcher for executing workbench commands, environment detection, and convenience wrappers for common operations on CIFTI, GIFTI, and surface files.
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="wbcmd">wbcmd<a class="anchor" aria-label="anchor" href="#wbcmd"></a>
+</h1></div>
+<!-- badges: start -->
+
+<p>wbcmd provides R wrapper functions for the <a href="https://www.humanconnectome.org/software/connectome-workbench" class="external-link">Connectome Workbench</a> command-line tool (<code>wb_command</code>).</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of wbcmd from <a href="https://github.com/lcbc-uio/wbcmd" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"lcbc-uio/wbcmd"</span><span class="op">)</span></span></code></pre></div>
+<p>You also need <a href="https://www.humanconnectome.org/software/connectome-workbench" class="external-link">Connectome Workbench</a> installed on your system.</p>
+</div>
+<div class="section level2">
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
+<p>wbcmd looks for <code>wb_command</code> in the following order:</p>
+<ol style="list-style-type: decimal">
+<li>The R option <code>wbcmd.path</code>
+</li>
+<li>The environment variable <code>WB_PATH</code>
+</li>
+<li>Platform-specific default installation paths</li>
+<li>The system <code>PATH</code>
+</li>
+</ol>
+<p>Check your setup with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lcbc-uio/wbcmd" class="external-link">wbcmd</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/wb_sitrep.html">wb_sitrep</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>If <code>wb_command</code> is not found automatically, set the path explicitly:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/set_wb_path.html">set_wb_path</a></span><span class="op">(</span><span class="st">"/path/to/wb_command"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<p>All commands flow through the central <code><a href="reference/wb_cmd.html">wb_cmd()</a></code> dispatcher:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/wb_cmd.html">wb_cmd</a></span><span class="op">(</span><span class="st">"-version"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/wb_cmd.html">wb_cmd</a></span><span class="op">(</span><span class="st">"-cifti-info"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.dscalar.nii"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Convenience wrappers provide a more ergonomic interface:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">wb_cifti_separate</span><span class="op">(</span></span>
+<span>  <span class="st">"data.dscalar.nii"</span>,</span>
+<span>  direction <span class="op">=</span> <span class="st">"COLUMN"</span>,</span>
+<span>  metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    CORTEX_LEFT <span class="op">=</span> <span class="st">"left.func.gii"</span>,</span>
+<span>    CORTEX_RIGHT <span class="op">=</span> <span class="st">"right.func.gii"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">wb_cifti_smoothing</span><span class="op">(</span></span>
+<span>  <span class="st">"data.dtseries.nii"</span>,</span>
+<span>  surface_sigma <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  volume_sigma <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  direction <span class="op">=</span> <span class="st">"COLUMN"</span>,</span>
+<span>  cifti_out <span class="op">=</span> <span class="st">"smoothed.dtseries.nii"</span>,</span>
+<span>  left_surface <span class="op">=</span> <span class="st">"left.midthickness.surf.gii"</span>,</span>
+<span>  right_surface <span class="op">=</span> <span class="st">"right.midthickness.surf.gii"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Get help for any subcommand:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/wb_help.html">wb_help</a></span><span class="op">(</span><span class="st">"-cifti-separate"</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/drmowinckels/wbcmd/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/drmowinckels/wbcmd/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/lcbc-uio/wbcmd/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/lcbc-uio/wbcmd/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -86,7 +152,14 @@ Provides R wrapper functions for the 'Connectome Workbench' command-line tool ('
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://github.com/lcbc-uio/wbcmd/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/lcbc-uio/wbcmd/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/lcbc-uio/wbcmd" class="external-link"><img src="https://codecov.io/gh/lcbc-uio/wbcmd/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>

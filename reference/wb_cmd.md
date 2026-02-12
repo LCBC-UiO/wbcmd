@@ -33,7 +33,7 @@ wb_cmd(
 - verbose:
 
   Logical; print command output? Defaults to
-  [`get_wb_verbosity()`](https://drmowinckels.github.io/wbcmd/reference/get_wb_verbosity.md).
+  [`get_wb_verbosity()`](https://lcbc-uio.github.io/wbcmd/reference/get_wb_verbosity.md).
 
 - intern:
 

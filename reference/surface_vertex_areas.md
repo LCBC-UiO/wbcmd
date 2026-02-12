@@ -26,8 +26,7 @@ surface_vertex_areas(surface_in, metric_out, verbose = get_wb_verbosity())
 ## Value
 
 The result of the underlying
-[`wb_cmd()`](https://drmowinckels.github.io/wbcmd/reference/wb_cmd.md)
-call.
+[`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md) call.
 
 ## Examples
 

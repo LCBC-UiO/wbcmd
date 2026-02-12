@@ -31,21 +31,21 @@ macOS default: `/Applications/wb_view.app/Contents/usr/bin/wb_command`
 ## Naming conventions
 
 - **Core infra** keeps `wb_` prefix:
-  [`wb_cmd()`](https://drmowinckels.github.io/wbcmd/reference/wb_cmd.md),
-  [`wb_sitrep()`](https://drmowinckels.github.io/wbcmd/reference/wb_sitrep.md),
-  [`wb_help()`](https://drmowinckels.github.io/wbcmd/reference/wb_help.md),
-  [`wb_version()`](https://drmowinckels.github.io/wbcmd/reference/wb_version.md),
-  [`have_wb()`](https://drmowinckels.github.io/wbcmd/reference/have_wb.md),
-  [`get_wb_path()`](https://drmowinckels.github.io/wbcmd/reference/get_wb_path.md),
-  [`set_wb_path()`](https://drmowinckels.github.io/wbcmd/reference/set_wb_path.md)
+  [`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md),
+  [`wb_sitrep()`](https://lcbc-uio.github.io/wbcmd/reference/wb_sitrep.md),
+  [`wb_help()`](https://lcbc-uio.github.io/wbcmd/reference/wb_help.md),
+  [`wb_version()`](https://lcbc-uio.github.io/wbcmd/reference/wb_version.md),
+  [`have_wb()`](https://lcbc-uio.github.io/wbcmd/reference/have_wb.md),
+  [`get_wb_path()`](https://lcbc-uio.github.io/wbcmd/reference/get_wb_path.md),
+  [`set_wb_path()`](https://lcbc-uio.github.io/wbcmd/reference/set_wb_path.md)
 - **Command wrappers** use the wb_command domain as prefix, no `wb_`:
-  [`cifti_parcellate()`](https://drmowinckels.github.io/wbcmd/reference/cifti_parcellate.md),
-  [`surface_vertex_areas()`](https://drmowinckels.github.io/wbcmd/reference/surface_vertex_areas.md),
-  [`metric_math()`](https://drmowinckels.github.io/wbcmd/reference/metric_math.md),
-  [`volume_math()`](https://drmowinckels.github.io/wbcmd/reference/volume_math.md),
-  [`file_information()`](https://drmowinckels.github.io/wbcmd/reference/file_information.md)
+  [`cifti_parcellate()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_parcellate.md),
+  [`surface_vertex_areas()`](https://lcbc-uio.github.io/wbcmd/reference/surface_vertex_areas.md),
+  [`metric_math()`](https://lcbc-uio.github.io/wbcmd/reference/metric_math.md),
+  [`volume_math()`](https://lcbc-uio.github.io/wbcmd/reference/volume_math.md),
+  [`file_information()`](https://lcbc-uio.github.io/wbcmd/reference/file_information.md)
 - Function names map directly to wb_command subcommands:
-  [`cifti_reduce()`](https://drmowinckels.github.io/wbcmd/reference/cifti_reduce.md)
+  [`cifti_reduce()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_reduce.md)
   → `-cifti-reduce`
 
 ## Adding a new wrapper
@@ -127,17 +127,17 @@ ciftiTools already covers ~19 wb_command subcommands. Avoid wrapping:
 
 ## Key files
 
-| File                               | Purpose                                                                                                                                                                  |
-|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `R/wb_cmd.R`                       | Central dispatcher + `try_wb_cmd()`                                                                                                                                      |
-| `R/wb_setup.R`                     | Path detection, [`have_wb()`](https://drmowinckels.github.io/wbcmd/reference/have_wb.md), [`wb_version()`](https://drmowinckels.github.io/wbcmd/reference/wb_version.md) |
-| `R/get_wb_setting.R`               | Hierarchical config lookup                                                                                                                                               |
-| `R/wb_sitrep.R`                    | Diagnostic situation report                                                                                                                                              |
-| `R/check_wb_result.R`              | Exit status + output file validation                                                                                                                                     |
-| `R/utils.R`                        | `temp_file()`, `mkdir()`, `sys_info()`, `validate_wb_env()`                                                                                                              |
-| `R/utils-files.R`                  | `check_path()`, `batch_file_exists()`, `validate_outfile()`                                                                                                              |
-| `R/utils-outputs.R`                | `wb_abort()`, `wb_warn()`, `wb_inform()` wrappers                                                                                                                        |
-| `tests/testthat/helper-external.R` | `skip_if_no_wb()`, `capture_wb_cmd()`, `create_test_sphere()`                                                                                                            |
+| File                               | Purpose                                                                                                                                                          |
+|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `R/wb_cmd.R`                       | Central dispatcher + `try_wb_cmd()`                                                                                                                              |
+| `R/wb_setup.R`                     | Path detection, [`have_wb()`](https://lcbc-uio.github.io/wbcmd/reference/have_wb.md), [`wb_version()`](https://lcbc-uio.github.io/wbcmd/reference/wb_version.md) |
+| `R/get_wb_setting.R`               | Hierarchical config lookup                                                                                                                                       |
+| `R/wb_sitrep.R`                    | Diagnostic situation report                                                                                                                                      |
+| `R/check_wb_result.R`              | Exit status + output file validation                                                                                                                             |
+| `R/utils.R`                        | `temp_file()`, `mkdir()`, `sys_info()`, `validate_wb_env()`                                                                                                      |
+| `R/utils-files.R`                  | `check_path()`, `batch_file_exists()`, `validate_outfile()`                                                                                                      |
+| `R/utils-outputs.R`                | `wb_abort()`, `wb_warn()`, `wb_inform()` wrappers                                                                                                                |
+| `tests/testthat/helper-external.R` | `skip_if_no_wb()`, `capture_wb_cmd()`, `create_test_sphere()`                                                                                                    |
 
 ## Dependencies
 

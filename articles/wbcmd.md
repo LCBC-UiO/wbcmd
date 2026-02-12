@@ -32,8 +32,7 @@ lookup order is:
 
 ## Running commands
 
-The
-[`wb_cmd()`](https://drmowinckels.github.io/wbcmd/reference/wb_cmd.md)
+The [`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md)
 function is the universal entry point. Pass the subcommand name and
 arguments exactly as you would on the command line:
 

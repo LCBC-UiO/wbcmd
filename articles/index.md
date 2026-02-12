@@ -3,4 +3,4 @@
 ### All vignettes
 
 - [Getting started with
-  wbcmd](https://drmowinckels.github.io/wbcmd/articles/wbcmd.md):
+  wbcmd](https://lcbc-uio.github.io/wbcmd/articles/wbcmd.md):

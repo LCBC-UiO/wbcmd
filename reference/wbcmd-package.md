@@ -9,9 +9,9 @@ common operations on CIFTI, GIFTI, and surface files.
 
 Useful links:
 
-- <https://github.com/drmowinckels/wbcmd>
+- <https://github.com/lcbc-uio/wbcmd>
 
-- Report bugs at <https://github.com/drmowinckels/wbcmd/issues>
+- Report bugs at <https://github.com/lcbc-uio/wbcmd/issues>
 
 ## Author
 

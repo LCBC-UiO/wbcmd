@@ -4,95 +4,95 @@
 
 Core dispatcher and command helpers
 
-- [`wb_cmd()`](https://drmowinckels.github.io/wbcmd/reference/wb_cmd.md)
-  : Execute a Connectome Workbench command
-- [`wb_help()`](https://drmowinckels.github.io/wbcmd/reference/wb_help.md)
-  : Access wb_command help text
-- [`check_wb_result()`](https://drmowinckels.github.io/wbcmd/reference/check_wb_result.md)
+- [`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md) :
+  Execute a Connectome Workbench command
+- [`wb_help()`](https://lcbc-uio.github.io/wbcmd/reference/wb_help.md) :
+  Access wb_command help text
+- [`check_wb_result()`](https://lcbc-uio.github.io/wbcmd/reference/check_wb_result.md)
   : Check the result of a workbench command
 
 ## Environment setup
 
 Detect, configure, and diagnose the workbench environment
 
-- [`wb_sitrep()`](https://drmowinckels.github.io/wbcmd/reference/wb_sitrep.md)
+- [`wb_sitrep()`](https://lcbc-uio.github.io/wbcmd/reference/wb_sitrep.md)
   : Situation report for Connectome Workbench
-- [`wb_version()`](https://drmowinckels.github.io/wbcmd/reference/wb_version.md)
+- [`wb_version()`](https://lcbc-uio.github.io/wbcmd/reference/wb_version.md)
   : Get Connectome Workbench version
-- [`have_wb()`](https://drmowinckels.github.io/wbcmd/reference/have_wb.md)
-  : Check if Connectome Workbench is available
-- [`set_wb_path()`](https://drmowinckels.github.io/wbcmd/reference/set_wb_path.md)
+- [`have_wb()`](https://lcbc-uio.github.io/wbcmd/reference/have_wb.md) :
+  Check if Connectome Workbench is available
+- [`set_wb_path()`](https://lcbc-uio.github.io/wbcmd/reference/set_wb_path.md)
   : Set the path to wb_command
-- [`get_wb_path()`](https://drmowinckels.github.io/wbcmd/reference/get_wb_path.md)
+- [`get_wb_path()`](https://lcbc-uio.github.io/wbcmd/reference/get_wb_path.md)
   : Find the wb_command executable
-- [`get_wb_setting()`](https://drmowinckels.github.io/wbcmd/reference/get_wb_setting.md)
+- [`get_wb_setting()`](https://lcbc-uio.github.io/wbcmd/reference/get_wb_setting.md)
   : Look up a workbench setting
-- [`get_wb_verbosity()`](https://drmowinckels.github.io/wbcmd/reference/get_wb_verbosity.md)
+- [`get_wb_verbosity()`](https://lcbc-uio.github.io/wbcmd/reference/get_wb_verbosity.md)
   : Get the workbench verbosity setting
 
 ## CIFTI operations
 
 Operations on CIFTI files not covered by ciftiTools
 
-- [`cifti_average()`](https://drmowinckels.github.io/wbcmd/reference/cifti_average.md)
+- [`cifti_average()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_average.md)
   : Average multiple CIFTI files
-- [`cifti_correlation()`](https://drmowinckels.github.io/wbcmd/reference/cifti_correlation.md)
+- [`cifti_correlation()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_correlation.md)
   : Compute correlation of CIFTI rows
-- [`cifti_dilate()`](https://drmowinckels.github.io/wbcmd/reference/cifti_dilate.md)
+- [`cifti_dilate()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_dilate.md)
   : Dilate a CIFTI file
-- [`cifti_find_clusters()`](https://drmowinckels.github.io/wbcmd/reference/cifti_find_clusters.md)
+- [`cifti_find_clusters()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_find_clusters.md)
   : Find clusters in a CIFTI file
-- [`cifti_gradient()`](https://drmowinckels.github.io/wbcmd/reference/cifti_gradient.md)
+- [`cifti_gradient()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_gradient.md)
   : Compute gradient of a CIFTI file
-- [`cifti_math()`](https://drmowinckels.github.io/wbcmd/reference/cifti_math.md)
+- [`cifti_math()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_math.md)
   : Evaluate expression on CIFTI files
-- [`cifti_parcellate()`](https://drmowinckels.github.io/wbcmd/reference/cifti_parcellate.md)
+- [`cifti_parcellate()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_parcellate.md)
   : Parcellate a CIFTI file
-- [`cifti_reduce()`](https://drmowinckels.github.io/wbcmd/reference/cifti_reduce.md)
+- [`cifti_reduce()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_reduce.md)
   : Reduce a CIFTI file along a dimension
-- [`cifti_stats()`](https://drmowinckels.github.io/wbcmd/reference/cifti_stats.md)
+- [`cifti_stats()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_stats.md)
   : Compute statistics on a CIFTI file
-- [`cifti_weighted_stats()`](https://drmowinckels.github.io/wbcmd/reference/cifti_weighted_stats.md)
+- [`cifti_weighted_stats()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_weighted_stats.md)
   : Compute weighted statistics on a CIFTI file
 
 ## Surface operations
 
 Surface geometry computations
 
-- [`surface_curvature()`](https://drmowinckels.github.io/wbcmd/reference/surface_curvature.md)
+- [`surface_curvature()`](https://lcbc-uio.github.io/wbcmd/reference/surface_curvature.md)
   : Compute surface curvature
-- [`surface_distortion()`](https://drmowinckels.github.io/wbcmd/reference/surface_distortion.md)
+- [`surface_distortion()`](https://lcbc-uio.github.io/wbcmd/reference/surface_distortion.md)
   : Measure distortion between surfaces
-- [`surface_generate_inflated()`](https://drmowinckels.github.io/wbcmd/reference/surface_generate_inflated.md)
+- [`surface_generate_inflated()`](https://lcbc-uio.github.io/wbcmd/reference/surface_generate_inflated.md)
   : Generate inflated surface
-- [`surface_geodesic_distance()`](https://drmowinckels.github.io/wbcmd/reference/surface_geodesic_distance.md)
+- [`surface_geodesic_distance()`](https://lcbc-uio.github.io/wbcmd/reference/surface_geodesic_distance.md)
   : Compute geodesic distance from a vertex
-- [`surface_information()`](https://drmowinckels.github.io/wbcmd/reference/surface_information.md)
+- [`surface_information()`](https://lcbc-uio.github.io/wbcmd/reference/surface_information.md)
   : Display surface information
-- [`surface_vertex_areas()`](https://drmowinckels.github.io/wbcmd/reference/surface_vertex_areas.md)
+- [`surface_vertex_areas()`](https://lcbc-uio.github.io/wbcmd/reference/surface_vertex_areas.md)
   : Compute vertex areas of a surface
 
 ## Metric operations
 
 Operations on metric (per-vertex) files
 
-- [`metric_math()`](https://drmowinckels.github.io/wbcmd/reference/metric_math.md)
+- [`metric_math()`](https://lcbc-uio.github.io/wbcmd/reference/metric_math.md)
   : Evaluate expression on metric files
-- [`metric_stats()`](https://drmowinckels.github.io/wbcmd/reference/metric_stats.md)
+- [`metric_stats()`](https://lcbc-uio.github.io/wbcmd/reference/metric_stats.md)
   : Compute spatial statistics on a metric file
 
 ## Volume operations
 
 Operations on volume files
 
-- [`volume_math()`](https://drmowinckels.github.io/wbcmd/reference/volume_math.md)
+- [`volume_math()`](https://lcbc-uio.github.io/wbcmd/reference/volume_math.md)
   : Evaluate expression on volume files
-- [`volume_to_surface_mapping()`](https://drmowinckels.github.io/wbcmd/reference/volume_to_surface_mapping.md)
+- [`volume_to_surface_mapping()`](https://lcbc-uio.github.io/wbcmd/reference/volume_to_surface_mapping.md)
   : Map volume data to a surface
 
 ## General
 
 File inspection utilities
 
-- [`file_information()`](https://drmowinckels.github.io/wbcmd/reference/file_information.md)
+- [`file_information()`](https://lcbc-uio.github.io/wbcmd/reference/file_information.md)
   : Display information about a file

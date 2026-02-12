@@ -11,7 +11,7 @@ wrapper follows a consistent pattern:
 2.  Use `check_path()` to validate input files
 3.  Use `validate_outfile()` to prepare output paths
 4.  Call
-    [`wb_cmd()`](https://drmowinckels.github.io/wbcmd/reference/wb_cmd.md)
+    [`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md)
     with the subcommand and arguments
 5.  Add tests in `tests/testthat/test-wb_<domain>_<operation>.R`
 6.  Run `devtools::document()` and `devtools::check()`

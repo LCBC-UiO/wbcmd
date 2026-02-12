@@ -46,8 +46,7 @@ cifti_math(
 ## Value
 
 The result of the underlying
-[`wb_cmd()`](https://drmowinckels.github.io/wbcmd/reference/wb_cmd.md)
-call.
+[`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md) call.
 
 ## Examples
 
