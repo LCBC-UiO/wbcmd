@@ -1,0 +1,36 @@
+Package: wbcmd
+Title: Wrapper Functions for 'Connectome Workbench' Commands
+Version: 0.0.0.9000
+Authors@R:
+    person("Athanasia Mo", "Mowinckel", , "a.m.mowinckel@psykologi.uio.no",
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-5756-0223"))
+Description: Provides R wrapper functions for the 'Connectome Workbench'
+    command-line tool ('wb_command'). Includes a central dispatcher for
+    executing workbench commands, environment detection, and convenience
+    wrappers for common operations on CIFTI, GIFTI, and surface files.
+License: MIT + file LICENSE
+URL: https://github.com/drmowinckels/wbcmd
+BugReports: https://github.com/drmowinckels/wbcmd/issues
+Imports:
+    cli,
+    lifecycle,
+    rlang,
+    tools,
+    utils
+Suggests:
+    covr,
+    knitr,
+    rmarkdown,
+    spelling,
+    testthat (>= 3.0.0),
+    withr
+SystemRequirements: Connectome Workbench
+    (https://www.humanconnectome.org/software/connectome-workbench)
+Config/testthat/edition: 3
+Config/testthat/parallel: true
+Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+VignetteBuilder: knitr

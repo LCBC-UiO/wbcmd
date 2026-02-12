@@ -1,0 +1,95 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# wbcmd
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/drmowinckels/wbcmd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/drmowinckels/wbcmd/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/drmowinckels/wbcmd/graph/badge.svg)](https://app.codecov.io/gh/drmowinckels/wbcmd)
+<!-- badges: end -->
+
+wbcmd provides R wrapper functions for the [Connectome Workbench](https://www.humanconnectome.org/software/connectome-workbench) command-line tool (`wb_command`).
+
+## Installation
+
+You can install the development version of wbcmd from [GitHub](https://github.com/drmowinckels/wbcmd) with:
+
+```r
+# install.packages("pak")
+pak::pak("drmowinckels/wbcmd")
+```
+
+You also need [Connectome Workbench](https://www.humanconnectome.org/software/connectome-workbench) installed on your system.
+
+## Setup
+
+wbcmd looks for `wb_command` in the following order:
+
+1. The R option `wbcmd.path`
+2. The environment variable `WB_PATH`
+3. Platform-specific default installation paths
+4. The system `PATH`
+
+Check your setup with:
+
+```{r sitrep, eval = FALSE}
+library(wbcmd)
+wb_sitrep()
+```
+
+If `wb_command` is not found automatically, set the path explicitly:
+
+```{r set-path, eval = FALSE}
+set_wb_path("/path/to/wb_command")
+```
+
+## Usage
+
+All commands flow through the central `wb_cmd()` dispatcher:
+
+```{r basic, eval = FALSE}
+wb_cmd("-version")
+wb_cmd("-cifti-info", c("data.dscalar.nii"))
+```
+
+Convenience wrappers provide a more ergonomic interface:
+
+```{r wrappers, eval = FALSE}
+wb_cifti_separate(
+  "data.dscalar.nii",
+  direction = "COLUMN",
+  metric = list(
+    CORTEX_LEFT = "left.func.gii",
+    CORTEX_RIGHT = "right.func.gii"
+  )
+)
+
+wb_cifti_smoothing(
+  "data.dtseries.nii",
+  surface_sigma = 4,
+  volume_sigma = 4,
+  direction = "COLUMN",
+  cifti_out = "smoothed.dtseries.nii",
+  left_surface = "left.midthickness.surf.gii",
+  right_surface = "right.midthickness.surf.gii"
+)
+```
+
+Get help for any subcommand:
+
+```{r help, eval = FALSE}
+wb_help("-cifti-separate")
+```

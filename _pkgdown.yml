@@ -1,0 +1,48 @@
+url: https://drmowinckels.github.io/wbcmd/
+
+template:
+  bootstrap: 5
+
+reference:
+  - title: "Command execution"
+    desc: "Core dispatcher and command helpers"
+    contents:
+      - wb_cmd
+      - wb_help
+      - check_wb_result
+
+  - title: "Environment setup"
+    desc: "Detect, configure, and diagnose the workbench environment"
+    contents:
+      - wb_sitrep
+      - wb_version
+      - have_wb
+      - set_wb_path
+      - get_wb_path
+      - get_wb_setting
+      - get_wb_verbosity
+
+  - title: "CIFTI operations"
+    desc: "Operations on CIFTI files not covered by ciftiTools"
+    contents:
+      - starts_with("cifti")
+
+  - title: "Surface operations"
+    desc: "Surface geometry computations"
+    contents:
+      - starts_with("surface")
+
+  - title: "Metric operations"
+    desc: "Operations on metric (per-vertex) files"
+    contents:
+      - starts_with("metric")
+
+  - title: "Volume operations"
+    desc: "Operations on volume files"
+    contents:
+      - starts_with("volume")
+
+  - title: "General"
+    desc: "File inspection utilities"
+    contents:
+      - file_information

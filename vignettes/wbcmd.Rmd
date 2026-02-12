@@ -1,0 +1,117 @@
+---
+title: "Getting started with wbcmd"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with wbcmd}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+wbcmd wraps the [Connectome Workbench](https://www.humanconnectome.org/software/connectome-workbench) `wb_command` CLI for use in R.
+Every function calls the same central dispatcher, so your environment only needs to be configured once.
+
+## Prerequisites
+
+Install Connectome Workbench from the [HCP website](https://www.humanconnectome.org/software/connectome-workbench).
+Then load the package and verify your setup:
+
+```{r setup}
+library(wbcmd)
+wb_sitrep()
+```
+
+If the binary is not detected automatically, point wbcmd to it:
+
+```{r path}
+set_wb_path("/opt/workbench/bin_linux64/wb_command")
+```
+
+You can also set the path via environment variable or R option.
+The lookup order is:
+
+1. R option `wbcmd.path`
+2. Environment variable `WB_PATH`
+3. Platform-specific defaults
+4. System `PATH`
+
+## Running commands
+
+The `wb_cmd()` function is the universal entry point.
+Pass the subcommand name and arguments exactly as you would on the command line:
+
+```{r cmd}
+wb_cmd("-version")
+wb_cmd("-file-information", c("data.dscalar.nii"))
+```
+
+## Convenience wrappers
+
+Typed wrappers handle argument construction and file validation for you.
+
+### Separate a CIFTI file
+
+```{r separate}
+wb_cifti_separate(
+  "data.dscalar.nii",
+  direction = "COLUMN",
+  metric = list(
+    CORTEX_LEFT = "left.func.gii",
+    CORTEX_RIGHT = "right.func.gii"
+  )
+)
+```
+
+### Smooth CIFTI data
+
+```{r smooth}
+wb_cifti_smoothing(
+  "data.dtseries.nii",
+  surface_sigma = 4,
+  volume_sigma = 4,
+  direction = "COLUMN",
+  cifti_out = "smoothed.dtseries.nii",
+  left_surface = "left.midthickness.surf.gii",
+  right_surface = "right.midthickness.surf.gii"
+)
+```
+
+### Parcellate
+
+```{r parcellate}
+wb_cifti_parcellate(
+  "data.dtseries.nii",
+  "atlas.dlabel.nii",
+  direction = "COLUMN",
+  cifti_out = "parcellated.ptseries.nii"
+)
+```
+
+### Resample a surface
+
+```{r resample}
+wb_surface_resample(
+  "lh.pial.surf.gii",
+  "lh.sphere.32k.surf.gii",
+  "lh.sphere.164k.surf.gii",
+  method = "BARYCENTRIC",
+  surface_out = "lh.pial.164k.surf.gii"
+)
+```
+
+## Controlling verbosity
+
+By default wbcmd prints each command before running it.
+Silence this with:
+```{r verbose}
+options(wbcmd.verbose = FALSE)
+```
+
+Or set the `WB_VERBOSE` environment variable to `FALSE`.
