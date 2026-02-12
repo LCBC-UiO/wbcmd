@@ -1,5 +1,6 @@
 ---
 output: github_document
+format: gfm
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -17,19 +18,19 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![R-CMD-check](https://github.com/drmowinckels/wbcmd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/drmowinckels/wbcmd/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/drmowinckels/wbcmd/graph/badge.svg)](https://app.codecov.io/gh/drmowinckels/wbcmd)
+[![R-CMD-check](https://github.com/lcbc-uio/wbcmd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lcbc-uio/wbcmd/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/lcbc-uio/wbcmd/graph/badge.svg)](https://app.codecov.io/gh/lcbc-uio/wbcmd)
 <!-- badges: end -->
 
 wbcmd provides R wrapper functions for the [Connectome Workbench](https://www.humanconnectome.org/software/connectome-workbench) command-line tool (`wb_command`).
 
 ## Installation
 
-You can install the development version of wbcmd from [GitHub](https://github.com/drmowinckels/wbcmd) with:
+You can install the development version of wbcmd from [GitHub](https://github.com/lcbc-uio/wbcmd) with:
 
 ```r
 # install.packages("pak")
-pak::pak("drmowinckels/wbcmd")
+pak::pak("lcbc-uio/wbcmd")
 ```
 
 You also need [Connectome Workbench](https://www.humanconnectome.org/software/connectome-workbench) installed on your system.

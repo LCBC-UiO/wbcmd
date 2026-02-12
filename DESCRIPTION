@@ -10,8 +10,8 @@ Description: Provides R wrapper functions for the 'Connectome Workbench'
     executing workbench commands, environment detection, and convenience
     wrappers for common operations on CIFTI, GIFTI, and surface files.
 License: MIT + file LICENSE
-URL: https://github.com/drmowinckels/wbcmd
-BugReports: https://github.com/drmowinckels/wbcmd/issues
+URL: https://github.com/lcbc-uio/wbcmd
+BugReports: https://github.com/lcbc-uio/wbcmd/issues
 Imports:
     cli,
     lifecycle,

@@ -3,5 +3,5 @@ bibentry(
   title    = "wbcmd: Wrapper Functions for Connectome Workbench Commands",
   author   = person("Athanasia Mo", "Mowinckel"),
   year     = "2026",
-  url      = "https://github.com/drmowinckels/wbcmd"
+  url      = "https://github.com/lcbc-uio/wbcmd"
 )

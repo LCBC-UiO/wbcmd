@@ -11,8 +11,8 @@ Provides R wrapper functions for the 'Connectome Workbench' command-line tool ('
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/drmowinckels/wbcmd}
-  \item Report bugs at \url{https://github.com/drmowinckels/wbcmd/issues}
+  \item \url{https://github.com/lcbc-uio/wbcmd}
+  \item Report bugs at \url{https://github.com/lcbc-uio/wbcmd/issues}
 }
 
 }
