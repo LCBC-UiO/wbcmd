@@ -21,14 +21,17 @@
 #' metric_stats("thickness.func.gii", operation = "MEAN")
 #' }
 #'
+#' @wbHelp -metric-stats
 #' @export
-metric_stats <- function(metric_in,
-                         operation = NULL,
-                         percentile = NULL,
-                         column = NULL,
-                         roi = NULL,
-                         show_map_name = FALSE,
-                         verbose = get_wb_verbosity()) {
+metric_stats <- function(
+  metric_in,
+  operation = NULL,
+  percentile = NULL,
+  column = NULL,
+  roi = NULL,
+  show_map_name = FALSE,
+  verbose = get_wb_verbosity()
+) {
   check_path(metric_in, arg = "metric_in")
 
   args <- shQuote(metric_in)
@@ -39,12 +42,16 @@ metric_stats <- function(metric_in,
     args <- c(args, "-percentile", percentile)
   }
 
-  if (!is.null(column)) args <- c(args, "-column", column)
+  if (!is.null(column)) {
+    args <- c(args, "-column", column)
+  }
   if (!is.null(roi)) {
     check_path(roi, arg = "roi")
     args <- c(args, "-roi", shQuote(roi))
   }
-  if (show_map_name) args <- c(args, "-show-map-name")
+  if (show_map_name) {
+    args <- c(args, "-show-map-name")
+  }
 
   wb_cmd("-metric-stats", args, verbose = verbose, intern = TRUE)
 }

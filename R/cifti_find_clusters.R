@@ -32,18 +32,21 @@
 #' )
 #' }
 #'
+#' @wbHelp -cifti-find-clusters
 #' @export
-cifti_find_clusters <- function(cifti_in,
-                                surface_value_threshold,
-                                surface_minimum_area,
-                                volume_value_threshold,
-                                volume_minimum_size,
-                                direction = c("COLUMN", "ROW"),
-                                cifti_out,
-                                left_surface = NULL,
-                                right_surface = NULL,
-                                less_than = FALSE,
-                                verbose = get_wb_verbosity()) {
+cifti_find_clusters <- function(
+  cifti_in,
+  surface_value_threshold,
+  surface_minimum_area,
+  volume_value_threshold,
+  volume_minimum_size,
+  direction = c("COLUMN", "ROW"),
+  cifti_out,
+  left_surface = NULL,
+  right_surface = NULL,
+  less_than = FALSE,
+  verbose = get_wb_verbosity()
+) {
   check_path(cifti_in, arg = "cifti_in")
   direction <- match.arg(direction)
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
@@ -66,7 +69,9 @@ cifti_find_clusters <- function(cifti_in,
     check_path(right_surface, arg = "right_surface")
     args <- c(args, "-right-surface", shQuote(right_surface))
   }
-  if (less_than) args <- c(args, "-less-than")
+  if (less_than) {
+    args <- c(args, "-less-than")
+  }
 
   wb_cmd("-cifti-find-clusters", args, verbose = verbose)
 }

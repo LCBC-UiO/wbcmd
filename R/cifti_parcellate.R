@@ -28,15 +28,18 @@
 #' )
 #' }
 #'
+#' @wbHelp -cifti-parcellate
 #' @export
-cifti_parcellate <- function(cifti_in,
-                             cifti_label,
-                             direction = c("COLUMN", "ROW"),
-                             cifti_out,
-                             spatial_weights = NULL,
-                             method = NULL,
-                             only_numeric = FALSE,
-                             verbose = get_wb_verbosity()) {
+cifti_parcellate <- function(
+  cifti_in,
+  cifti_label,
+  direction = c("COLUMN", "ROW"),
+  cifti_out,
+  spatial_weights = NULL,
+  method = NULL,
+  only_numeric = FALSE,
+  verbose = get_wb_verbosity()
+) {
   check_path(cifti_in, arg = "cifti_in")
   check_path(cifti_label, arg = "cifti_label")
   direction <- match.arg(direction)
@@ -52,21 +55,32 @@ cifti_parcellate <- function(cifti_in,
   if (!is.null(spatial_weights)) {
     if (!is.null(spatial_weights$cifti_weights)) {
       check_path(spatial_weights$cifti_weights)
-      args <- c(args, "-spatial-weights", "-cifti-weights",
-                shQuote(spatial_weights$cifti_weights))
+      args <- c(
+        args,
+        "-spatial-weights",
+        "-cifti-weights",
+        shQuote(spatial_weights$cifti_weights)
+      )
     } else if (!is.null(spatial_weights$left_area_surf)) {
       check_path(spatial_weights$left_area_surf)
       check_path(spatial_weights$right_area_surf)
-      args <- c(args, "-spatial-weights",
-                "-left-area-surface", shQuote(spatial_weights$left_area_surf),
-                "-right-area-surface", shQuote(spatial_weights$right_area_surf))
+      args <- c(
+        args,
+        "-spatial-weights",
+        "-left-area-surface",
+        shQuote(spatial_weights$left_area_surf),
+        "-right-area-surface",
+        shQuote(spatial_weights$right_area_surf)
+      )
     }
   }
 
   if (!is.null(method)) {
     args <- c(args, "-method", method)
   }
-  if (only_numeric) args <- c(args, "-only-numeric")
+  if (only_numeric) {
+    args <- c(args, "-only-numeric")
+  }
 
   wb_cmd("-cifti-parcellate", args, verbose = verbose)
 }

@@ -17,12 +17,20 @@
 get_wb_setting <- function(opt_var, env_var, defaults = NULL, is_path = TRUE) {
   opt_val <- getOption(opt_var)
   if (!is.null(opt_val) && nzchar(opt_val)) {
-    return(return_setting(opt_val, source = paste0("option: ", opt_var), is_path = is_path))
+    return(return_setting(
+      opt_val,
+      source = paste0("option: ", opt_var),
+      is_path = is_path
+    ))
   }
 
   env_val <- Sys.getenv(env_var, unset = "")
   if (nzchar(env_val)) {
-    return(return_setting(env_val, source = paste0("envvar: ", env_var), is_path = is_path))
+    return(return_setting(
+      env_val,
+      source = paste0("envvar: ", env_var),
+      is_path = is_path
+    ))
   }
 
   if (!is.null(defaults) && length(defaults) > 0) {
@@ -30,7 +38,11 @@ get_wb_setting <- function(opt_var, env_var, defaults = NULL, is_path = TRUE) {
       resolved <- return_setting(d, source = "default", is_path = is_path)
       if (resolved$exists) return(resolved)
     }
-    return(return_setting(defaults[[1]], source = "default (not found)", is_path = is_path))
+    return(return_setting(
+      defaults[[1]],
+      source = "default (not found)",
+      is_path = is_path
+    ))
   }
 
   list(value = NULL, source = "not set", exists = FALSE)

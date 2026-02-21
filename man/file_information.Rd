@@ -40,3 +40,7 @@ file_information("data.dscalar.nii", only_map_names = TRUE)
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-file-information")}
+}
+

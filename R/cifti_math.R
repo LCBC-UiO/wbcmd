@@ -22,13 +22,16 @@
 #' )
 #' }
 #'
+#' @wbHelp -cifti-math
 #' @export
-cifti_math <- function(expression,
-                       cifti_out,
-                       var,
-                       fixnan = FALSE,
-                       override_mapping_check = FALSE,
-                       verbose = get_wb_verbosity()) {
+cifti_math <- function(
+  expression,
+  cifti_out,
+  var,
+  fixnan = FALSE,
+  override_mapping_check = FALSE,
+  verbose = get_wb_verbosity()
+) {
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
 
   args <- c(shQuote(expression), shQuote(cifti_out))
@@ -38,8 +41,12 @@ cifti_math <- function(expression,
     args <- c(args, "-var", shQuote(nm), shQuote(var[[nm]]))
   }
 
-  if (fixnan) args <- c(args, "-fixnan", "0")
-  if (override_mapping_check) args <- c(args, "-override-mapping-check")
+  if (fixnan) {
+    args <- c(args, "-fixnan", "0")
+  }
+  if (override_mapping_check) {
+    args <- c(args, "-override-mapping-check")
+  }
 
   wb_cmd("-cifti-math", args, verbose = verbose)
 }

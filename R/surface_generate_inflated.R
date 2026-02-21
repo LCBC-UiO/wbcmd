@@ -21,12 +21,15 @@
 #' )
 #' }
 #'
+#' @wbHelp -surface-generate-inflated
 #' @export
-surface_generate_inflated <- function(anatomical_surface,
-                                      inflated_out,
-                                      very_inflated_out,
-                                      iterations_scale = NULL,
-                                      verbose = get_wb_verbosity()) {
+surface_generate_inflated <- function(
+  anatomical_surface,
+  inflated_out,
+  very_inflated_out,
+  iterations_scale = NULL,
+  verbose = get_wb_verbosity()
+) {
   check_path(anatomical_surface, arg = "anatomical_surface")
   inflated_out <- validate_outfile(inflated_out, ext = ".surf.gii")
   very_inflated_out <- validate_outfile(very_inflated_out, ext = ".surf.gii")

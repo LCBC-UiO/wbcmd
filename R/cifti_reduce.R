@@ -25,20 +25,25 @@
 #' )
 #' }
 #'
+#' @wbHelp -cifti-reduce
 #' @export
-cifti_reduce <- function(cifti_in,
-                         direction = c("ROW", "COLUMN"),
-                         operation = "MEAN",
-                         cifti_out,
-                         only_numeric = FALSE,
-                         verbose = get_wb_verbosity()) {
+cifti_reduce <- function(
+  cifti_in,
+  direction = c("ROW", "COLUMN"),
+  operation = "MEAN",
+  cifti_out,
+  only_numeric = FALSE,
+  verbose = get_wb_verbosity()
+) {
   check_path(cifti_in, arg = "cifti_in")
   direction <- match.arg(direction)
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
 
   args <- c(shQuote(cifti_in), operation, direction, shQuote(cifti_out))
 
-  if (only_numeric) args <- c(args, "-only-numeric")
+  if (only_numeric) {
+    args <- c(args, "-only-numeric")
+  }
 
   wb_cmd("-cifti-reduce", args, verbose = verbose)
 }

@@ -28,16 +28,23 @@
 #' )
 #' }
 #'
+#' @wbHelp -volume-to-surface-mapping
 #' @export
-volume_to_surface_mapping <- function(volume_in,
-                                      surface,
-                                      metric_out,
-                                      method = c("trilinear", "enclosing",
-                                                 "cubic", "ribbon-constrained",
-                                                 "myelin-style"),
-                                      inner_surface = NULL,
-                                      outer_surface = NULL,
-                                      verbose = get_wb_verbosity()) {
+volume_to_surface_mapping <- function(
+  volume_in,
+  surface,
+  metric_out,
+  method = c(
+    "trilinear",
+    "enclosing",
+    "cubic",
+    "ribbon-constrained",
+    "myelin-style"
+  ),
+  inner_surface = NULL,
+  outer_surface = NULL,
+  verbose = get_wb_verbosity()
+) {
   check_path(volume_in, arg = "volume_in")
   check_path(surface, arg = "surface")
   method <- match.arg(method)
@@ -48,8 +55,12 @@ volume_to_surface_mapping <- function(volume_in,
   if (method %in% c("ribbon-constrained", "myelin-style")) {
     check_path(inner_surface, arg = "inner_surface")
     check_path(outer_surface, arg = "outer_surface")
-    args <- c(args, paste0("-", method),
-              shQuote(inner_surface), shQuote(outer_surface))
+    args <- c(
+      args,
+      paste0("-", method),
+      shQuote(inner_surface),
+      shQuote(outer_surface)
+    )
   } else {
     args <- c(args, paste0("-", method))
   }

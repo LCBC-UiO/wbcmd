@@ -31,6 +31,11 @@ sys_info <- function() {
   )
 }
 
+#' @noRd
+sys_which <- function(name) {
+  Sys.which(name)
+}
+
 #' Validate workbench environment
 #'
 #' @param call Calling environment for error reporting.

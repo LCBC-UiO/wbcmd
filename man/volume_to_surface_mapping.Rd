@@ -52,3 +52,7 @@ volume_to_surface_mapping(
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-volume-to-surface-mapping")}
+}
+

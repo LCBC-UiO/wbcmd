@@ -7,8 +7,12 @@
 #'
 #' @return Nothing, throws an error.
 #' @noRd
-wb_abort <- function(message, ..., call = rlang::caller_env(),
-                     .envir = rlang::caller_env()) {
+wb_abort <- function(
+  message,
+  ...,
+  call = rlang::caller_env(),
+  .envir = rlang::caller_env()
+) {
   cli::cli_abort(
     message,
     ...,

@@ -47,3 +47,7 @@ cifti_reduce(
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-cifti-reduce")}
+}
+

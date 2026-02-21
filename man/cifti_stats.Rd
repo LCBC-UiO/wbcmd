@@ -45,3 +45,7 @@ cifti_stats("data.dscalar.nii", percentile = 95)
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-cifti-stats")}
+}
+

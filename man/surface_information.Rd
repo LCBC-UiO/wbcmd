@@ -24,3 +24,7 @@ surface_information("lh.midthickness.surf.gii")
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-surface-information")}
+}
+

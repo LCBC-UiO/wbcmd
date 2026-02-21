@@ -26,16 +26,19 @@
 #' )
 #' }
 #'
+#' @wbHelp -cifti-gradient
 #' @export
-cifti_gradient <- function(cifti_in,
-                           direction = c("COLUMN", "ROW"),
-                           cifti_out,
-                           left_surface = NULL,
-                           right_surface = NULL,
-                           surface_presmooth = NULL,
-                           volume_presmooth = NULL,
-                           average_output = FALSE,
-                           verbose = get_wb_verbosity()) {
+cifti_gradient <- function(
+  cifti_in,
+  direction = c("COLUMN", "ROW"),
+  cifti_out,
+  left_surface = NULL,
+  right_surface = NULL,
+  surface_presmooth = NULL,
+  volume_presmooth = NULL,
+  average_output = FALSE,
+  verbose = get_wb_verbosity()
+) {
   check_path(cifti_in, arg = "cifti_in")
   direction <- match.arg(direction)
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
@@ -56,7 +59,9 @@ cifti_gradient <- function(cifti_in,
   if (!is.null(volume_presmooth)) {
     args <- c(args, "-volume-presmooth", volume_presmooth)
   }
-  if (average_output) args <- c(args, "-average-output")
+  if (average_output) {
+    args <- c(args, "-average-output")
+  }
 
   wb_cmd("-cifti-gradient", args, verbose = verbose)
 }

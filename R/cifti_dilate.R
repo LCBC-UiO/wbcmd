@@ -28,16 +28,19 @@
 #' )
 #' }
 #'
+#' @wbHelp -cifti-dilate
 #' @export
-cifti_dilate <- function(cifti_in,
-                         direction = c("COLUMN", "ROW"),
-                         surface_distance,
-                         volume_distance,
-                         cifti_out,
-                         left_surface = NULL,
-                         right_surface = NULL,
-                         nearest = FALSE,
-                         verbose = get_wb_verbosity()) {
+cifti_dilate <- function(
+  cifti_in,
+  direction = c("COLUMN", "ROW"),
+  surface_distance,
+  volume_distance,
+  cifti_out,
+  left_surface = NULL,
+  right_surface = NULL,
+  nearest = FALSE,
+  verbose = get_wb_verbosity()
+) {
   check_path(cifti_in, arg = "cifti_in")
   direction <- match.arg(direction)
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
@@ -58,7 +61,9 @@ cifti_dilate <- function(cifti_in,
     check_path(right_surface, arg = "right_surface")
     args <- c(args, "-right-surface", shQuote(right_surface))
   }
-  if (nearest) args <- c(args, "-nearest")
+  if (nearest) {
+    args <- c(args, "-nearest")
+  }
 
   wb_cmd("-cifti-dilate", args, verbose = verbose)
 }

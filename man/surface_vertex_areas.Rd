@@ -29,3 +29,7 @@ surface_vertex_areas(
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-surface-vertex-areas")}
+}
+

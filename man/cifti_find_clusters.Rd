@@ -64,3 +64,7 @@ cifti_find_clusters(
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-cifti-find-clusters")}
+}
+

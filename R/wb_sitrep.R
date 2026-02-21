@@ -71,7 +71,8 @@ alert_info <- function(setting, header) {
   }
 
   status <- if (setting$exists) "success" else "warning"
-  fn <- switch(status,
+  fn <- switch(
+    status,
     success = cli::cli_alert_success,
     warning = cli::cli_alert_warning
   )

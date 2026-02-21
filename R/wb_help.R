@@ -25,3 +25,49 @@ wb_help <- function(cmd = NULL) {
   cat(res, sep = "\n")
   invisible(res)
 }
+
+#' Render wb_command CLI help as Rd markup
+#'
+#' Called at render time by `\Sexpr` in generated .Rd files.
+#' Returns valid Rd markup showing CLI help or a fallback message.
+#'
+#' @param cmd The wb_command subcommand (e.g. `"-cifti-average"`).
+#'
+#' @return Character string of Rd markup.
+#'
+#' @export
+wb_help_rd <- function(cmd) {
+  if (!grepl("^-[a-z][a-z-]*$", cmd)) {
+    return(paste0("Invalid command: \\code{", cmd, "}."))
+  }
+
+  if (!have_wb()) {
+    return(paste0(
+      "Connectome Workbench is not installed. Run \\code{wb_help(\"",
+      cmd,
+      "\")} in a session with wb_command available."
+    ))
+  }
+
+  help_text <- tryCatch(
+    {
+      wb_path <- get_wb_path()
+      full_cmd <- paste(c(shQuote(wb_path), cmd), collapse = " ")
+      suppressWarnings(try_wb_cmd(full_cmd, intern = TRUE, verbose = FALSE))
+    },
+    error = function(e) NULL
+  )
+
+  if (is.null(help_text) || length(help_text) == 0) {
+    return(paste0("Help not available for \\code{", cmd, "}."))
+  }
+
+  escaped <- help_text
+  escaped <- gsub("\\", "\\\\", escaped, fixed = TRUE)
+  escaped <- gsub("{", "\\{", escaped, fixed = TRUE)
+  escaped <- gsub("}", "\\}", escaped, fixed = TRUE)
+  escaped <- gsub("%", "\\%", escaped, fixed = TRUE)
+  escaped <- gsub("#", "\\#", escaped, fixed = TRUE)
+
+  paste0("\\preformatted{", paste(escaped, collapse = "\n"), "}")
+}

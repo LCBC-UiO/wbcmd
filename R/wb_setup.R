@@ -26,7 +26,7 @@ get_wb_path <- function(simplify = TRUE) {
   )
 
   if (!setting$exists) {
-    path_lookup <- Sys.which("wb_command")
+    path_lookup <- sys_which("wb_command")
     if (nzchar(path_lookup)) {
       setting <- list(
         value = unname(path_lookup),
@@ -64,7 +64,9 @@ have_wb <- function() {
 #'
 #' @export
 wb_version <- function() {
-  if (!have_wb()) return("")
+  if (!have_wb()) {
+    return("")
+  }
   tryCatch(
     {
       res <- system2(
@@ -107,7 +109,8 @@ set_wb_path <- function(path, check = TRUE) {
 #' @noRd
 wb_default_paths <- function() {
   sys <- Sys.info()[["sysname"]]
-  switch(sys,
+  switch(
+    sys,
     Darwin = c(
       "/Applications/wb_view.app/Contents/usr/bin/wb_command",
       "/Applications/workbench/bin_macosx64/wb_command",

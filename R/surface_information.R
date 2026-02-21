@@ -13,11 +13,15 @@
 #' surface_information("lh.midthickness.surf.gii")
 #' }
 #'
+#' @wbHelp -surface-information
 #' @export
-surface_information <- function(surface_in,
-                                verbose = get_wb_verbosity()) {
-  check_path(surface_in, arg = "surface_in")
+surface_information <- function(surface_in, verbose = get_wb_verbosity()) {
+       check_path(surface_in, arg = "surface_in")
 
-  wb_cmd("-surface-information", shQuote(surface_in),
-         verbose = verbose, intern = TRUE)
+       wb_cmd(
+              "-surface-information",
+              shQuote(surface_in),
+              verbose = verbose,
+              intern = TRUE
+       )
 }

@@ -17,10 +17,13 @@
 #' )
 #' }
 #'
+#' @wbHelp -surface-vertex-areas
 #' @export
-surface_vertex_areas <- function(surface_in,
-                                 metric_out,
-                                 verbose = get_wb_verbosity()) {
+surface_vertex_areas <- function(
+  surface_in,
+  metric_out,
+  verbose = get_wb_verbosity()
+) {
   check_path(surface_in, arg = "surface_in")
   metric_out <- validate_outfile(metric_out, ext = ".func.gii")
 

@@ -18,21 +18,32 @@
 #' file_information("data.dscalar.nii", only_map_names = TRUE)
 #' }
 #'
+#' @wbHelp -file-information
 #' @export
-file_information <- function(data_file,
-                             only_map_names = FALSE,
-                             only_number_of_maps = FALSE,
-                             only_metadata = FALSE,
-                             only_cifti_xml = FALSE,
-                             verbose = get_wb_verbosity()) {
+file_information <- function(
+  data_file,
+  only_map_names = FALSE,
+  only_number_of_maps = FALSE,
+  only_metadata = FALSE,
+  only_cifti_xml = FALSE,
+  verbose = get_wb_verbosity()
+) {
   check_path(data_file, arg = "data_file")
 
   args <- shQuote(data_file)
 
-  if (only_map_names) args <- c(args, "-only-map-names")
-  if (only_number_of_maps) args <- c(args, "-only-number-of-maps")
-  if (only_metadata) args <- c(args, "-only-metadata")
-  if (only_cifti_xml) args <- c(args, "-only-cifti-xml")
+  if (only_map_names) {
+    args <- c(args, "-only-map-names")
+  }
+  if (only_number_of_maps) {
+    args <- c(args, "-only-number-of-maps")
+  }
+  if (only_metadata) {
+    args <- c(args, "-only-metadata")
+  }
+  if (only_cifti_xml) {
+    args <- c(args, "-only-cifti-xml")
+  }
 
   wb_cmd("-file-information", args, verbose = verbose, intern = TRUE)
 }

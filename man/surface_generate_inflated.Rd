@@ -41,3 +41,7 @@ surface_generate_inflated(
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-surface-generate-inflated")}
+}
+

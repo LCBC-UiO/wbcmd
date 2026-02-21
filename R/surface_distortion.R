@@ -24,15 +24,18 @@
 #' )
 #' }
 #'
+#' @wbHelp -surface-distortion
 #' @export
-surface_distortion <- function(surface_reference,
-                               surface_distorted,
-                               metric_out,
-                               smooth = NULL,
-                               caret5_method = FALSE,
-                               edge_method = FALSE,
-                               local_affine_method = FALSE,
-                               verbose = get_wb_verbosity()) {
+surface_distortion <- function(
+  surface_reference,
+  surface_distorted,
+  metric_out,
+  smooth = NULL,
+  caret5_method = FALSE,
+  edge_method = FALSE,
+  local_affine_method = FALSE,
+  verbose = get_wb_verbosity()
+) {
   check_path(surface_reference, arg = "surface_reference")
   check_path(surface_distorted, arg = "surface_distorted")
   metric_out <- validate_outfile(metric_out, ext = ".func.gii")
@@ -43,10 +46,18 @@ surface_distortion <- function(surface_reference,
     shQuote(metric_out)
   )
 
-  if (!is.null(smooth)) args <- c(args, "-smooth", smooth)
-  if (caret5_method) args <- c(args, "-caret5-method")
-  if (edge_method) args <- c(args, "-edge-method")
-  if (local_affine_method) args <- c(args, "-local-affine-method")
+  if (!is.null(smooth)) {
+    args <- c(args, "-smooth", smooth)
+  }
+  if (caret5_method) {
+    args <- c(args, "-caret5-method")
+  }
+  if (edge_method) {
+    args <- c(args, "-edge-method")
+  }
+  if (local_affine_method) {
+    args <- c(args, "-local-affine-method")
+  }
 
   wb_cmd("-surface-distortion", args, verbose = verbose)
 }

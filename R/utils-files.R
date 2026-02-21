@@ -24,7 +24,11 @@ check_path <- function(path, arg = "file", call = rlang::caller_env()) {
 #'
 #' @return The paths, invisibly.
 #' @noRd
-batch_file_exists <- function(paths, arg = "files", call = rlang::caller_env()) {
+batch_file_exists <- function(
+  paths,
+  arg = "files",
+  call = rlang::caller_env()
+) {
   missing <- !file.exists(paths)
   if (any(missing)) {
     wb_abort(
@@ -66,13 +70,27 @@ validate_outfile <- function(outfile = NULL, ext = ".nii") {
 #' @noRd
 validate_extension <- function(path, valid_extensions, arg = "file") {
   ext <- tools::file_ext(path)
-  if (grepl("\\.nii\\.gz$", path)) ext <- "nii.gz"
-  if (grepl("\\.dscalar\\.nii$", path)) ext <- "dscalar.nii"
-  if (grepl("\\.dtseries\\.nii$", path)) ext <- "dtseries.nii"
-  if (grepl("\\.dlabel\\.nii$", path)) ext <- "dlabel.nii"
-  if (grepl("\\.pscalar\\.nii$", path)) ext <- "pscalar.nii"
-  if (grepl("\\.ptseries\\.nii$", path)) ext <- "ptseries.nii"
-  if (grepl("\\.plabel\\.nii$", path)) ext <- "plabel.nii"
+  if (grepl("\\.nii\\.gz$", path)) {
+    ext <- "nii.gz"
+  }
+  if (grepl("\\.dscalar\\.nii$", path)) {
+    ext <- "dscalar.nii"
+  }
+  if (grepl("\\.dtseries\\.nii$", path)) {
+    ext <- "dtseries.nii"
+  }
+  if (grepl("\\.dlabel\\.nii$", path)) {
+    ext <- "dlabel.nii"
+  }
+  if (grepl("\\.pscalar\\.nii$", path)) {
+    ext <- "pscalar.nii"
+  }
+  if (grepl("\\.ptseries\\.nii$", path)) {
+    ext <- "ptseries.nii"
+  }
+  if (grepl("\\.plabel\\.nii$", path)) {
+    ext <- "plabel.nii"
+  }
 
   if (nzchar(ext) && !ext %in% valid_extensions) {
     wb_warn(

@@ -45,3 +45,7 @@ metric_stats("thickness.func.gii", operation = "MEAN")
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-metric-stats")}
+}
+

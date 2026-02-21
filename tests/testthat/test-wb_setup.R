@@ -23,7 +23,8 @@ describe("get_wb_path()", {
   it("returns NULL when nothing configured", {
     local_wb_unset()
     local_mocked_bindings(
-      wb_default_paths = function() character(0)
+      wb_default_paths = function() character(0),
+      sys_which = function(...) c(wb_command = "")
     )
 
     result <- get_wb_path(simplify = FALSE)
@@ -43,9 +44,11 @@ describe("have_wb()", {
   })
 
   it("returns FALSE when wb_command is not found", {
-    local_wb_unset()
     local_mocked_bindings(
-      wb_default_paths = function() character(0)
+      get_wb_path = function(simplify = TRUE) {
+        if (simplify) return(NULL)
+        list(value = NULL, source = "not set", exists = FALSE)
+      }
     )
     expect_false(have_wb())
   })

@@ -21,12 +21,15 @@
 #' )
 #' }
 #'
+#' @wbHelp -metric-math
 #' @export
-metric_math <- function(expression,
-                        metric_out,
-                        var,
-                        fixnan = FALSE,
-                        verbose = get_wb_verbosity()) {
+metric_math <- function(
+  expression,
+  metric_out,
+  var,
+  fixnan = FALSE,
+  verbose = get_wb_verbosity()
+) {
   metric_out <- validate_outfile(metric_out, ext = ".func.gii")
 
   args <- c(shQuote(expression), shQuote(metric_out))
@@ -36,7 +39,9 @@ metric_math <- function(expression,
     args <- c(args, "-var", shQuote(nm), shQuote(var[[nm]]))
   }
 
-  if (fixnan) args <- c(args, "-fixnan", "0")
+  if (fixnan) {
+    args <- c(args, "-fixnan", "0")
+  }
 
   wb_cmd("-metric-math", args, verbose = verbose)
 }

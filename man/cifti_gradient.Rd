@@ -54,3 +54,7 @@ cifti_gradient(
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-cifti-gradient")}
+}
+

@@ -21,12 +21,15 @@
 #' )
 #' }
 #'
+#' @wbHelp -volume-math
 #' @export
-volume_math <- function(expression,
-                        volume_out,
-                        var,
-                        fixnan = FALSE,
-                        verbose = get_wb_verbosity()) {
+volume_math <- function(
+  expression,
+  volume_out,
+  var,
+  fixnan = FALSE,
+  verbose = get_wb_verbosity()
+) {
   volume_out <- validate_outfile(volume_out, ext = ".nii.gz")
 
   args <- c(shQuote(expression), shQuote(volume_out))
@@ -36,7 +39,9 @@ volume_math <- function(expression,
     args <- c(args, "-var", shQuote(nm), shQuote(var[[nm]]))
   }
 
-  if (fixnan) args <- c(args, "-fixnan", "0")
+  if (fixnan) {
+    args <- c(args, "-fixnan", "0")
+  }
 
   wb_cmd("-volume-math", args, verbose = verbose)
 }

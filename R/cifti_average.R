@@ -19,11 +19,14 @@
 #' )
 #' }
 #'
+#' @wbHelp -cifti-average
 #' @export
-cifti_average <- function(cifti_out,
-                          cifti_in,
-                          weights = NULL,
-                          verbose = get_wb_verbosity()) {
+cifti_average <- function(
+  cifti_out,
+  cifti_in,
+  weights = NULL,
+  verbose = get_wb_verbosity()
+) {
   batch_file_exists(cifti_in, arg = "cifti_in")
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
 

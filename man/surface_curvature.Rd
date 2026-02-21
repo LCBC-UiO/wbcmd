@@ -36,3 +36,7 @@ surface_curvature(
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-surface-curvature")}
+}
+

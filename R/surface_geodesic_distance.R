@@ -24,19 +24,24 @@
 #' )
 #' }
 #'
+#' @wbHelp -surface-geodesic-distance
 #' @export
-surface_geodesic_distance <- function(surface_in,
-                                      vertex,
-                                      metric_out,
-                                      limit = NULL,
-                                      corrected_areas = NULL,
-                                      verbose = get_wb_verbosity()) {
+surface_geodesic_distance <- function(
+  surface_in,
+  vertex,
+  metric_out,
+  limit = NULL,
+  corrected_areas = NULL,
+  verbose = get_wb_verbosity()
+) {
   check_path(surface_in, arg = "surface_in")
   metric_out <- validate_outfile(metric_out, ext = ".func.gii")
 
   args <- c(shQuote(surface_in), vertex, shQuote(metric_out))
 
-  if (!is.null(limit)) args <- c(args, "-limit", limit)
+  if (!is.null(limit)) {
+    args <- c(args, "-limit", limit)
+  }
   if (!is.null(corrected_areas)) {
     check_path(corrected_areas, arg = "corrected_areas")
     args <- c(args, "-corrected-areas", shQuote(corrected_areas))

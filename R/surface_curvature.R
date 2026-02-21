@@ -18,11 +18,14 @@
 #' )
 #' }
 #'
+#' @wbHelp -surface-curvature
 #' @export
-surface_curvature <- function(surface_in,
-                              mean_out = NULL,
-                              gauss_out = NULL,
-                              verbose = get_wb_verbosity()) {
+surface_curvature <- function(
+  surface_in,
+  mean_out = NULL,
+  gauss_out = NULL,
+  verbose = get_wb_verbosity()
+) {
   check_path(surface_in, arg = "surface_in")
 
   args <- shQuote(surface_in)

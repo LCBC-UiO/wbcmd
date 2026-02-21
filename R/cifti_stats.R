@@ -21,14 +21,17 @@
 #' cifti_stats("data.dscalar.nii", percentile = 95)
 #' }
 #'
+#' @wbHelp -cifti-stats
 #' @export
-cifti_stats <- function(cifti_in,
-                        operation = NULL,
-                        percentile = NULL,
-                        column = NULL,
-                        roi = NULL,
-                        show_map_name = FALSE,
-                        verbose = get_wb_verbosity()) {
+cifti_stats <- function(
+  cifti_in,
+  operation = NULL,
+  percentile = NULL,
+  column = NULL,
+  roi = NULL,
+  show_map_name = FALSE,
+  verbose = get_wb_verbosity()
+) {
   check_path(cifti_in, arg = "cifti_in")
 
   args <- shQuote(cifti_in)
@@ -39,12 +42,16 @@ cifti_stats <- function(cifti_in,
     args <- c(args, "-percentile", percentile)
   }
 
-  if (!is.null(column)) args <- c(args, "-column", column)
+  if (!is.null(column)) {
+    args <- c(args, "-column", column)
+  }
   if (!is.null(roi)) {
     check_path(roi, arg = "roi")
     args <- c(args, "-roi", shQuote(roi))
   }
-  if (show_map_name) args <- c(args, "-show-map-name")
+  if (show_map_name) {
+    args <- c(args, "-show-map-name")
+  }
 
   wb_cmd("-cifti-stats", args, verbose = verbose, intern = TRUE)
 }

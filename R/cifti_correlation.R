@@ -23,15 +23,18 @@
 #' )
 #' }
 #'
+#' @wbHelp -cifti-correlation
 #' @export
-cifti_correlation <- function(cifti_in,
-                              cifti_out,
-                              roi_override = NULL,
-                              weights = NULL,
-                              fisher_z = FALSE,
-                              no_demean = FALSE,
-                              covariance = FALSE,
-                              verbose = get_wb_verbosity()) {
+cifti_correlation <- function(
+  cifti_in,
+  cifti_out,
+  roi_override = NULL,
+  weights = NULL,
+  fisher_z = FALSE,
+  no_demean = FALSE,
+  covariance = FALSE,
+  verbose = get_wb_verbosity()
+) {
   check_path(cifti_in, arg = "cifti_in")
   cifti_out <- validate_outfile(cifti_out, ext = ".dconn.nii")
 
@@ -45,9 +48,15 @@ cifti_correlation <- function(cifti_in,
     check_path(weights, arg = "weights")
     args <- c(args, "-weights", shQuote(weights))
   }
-  if (fisher_z) args <- c(args, "-fisher-z")
-  if (no_demean) args <- c(args, "-no-demean")
-  if (covariance) args <- c(args, "-covariance")
+  if (fisher_z) {
+    args <- c(args, "-fisher-z")
+  }
+  if (no_demean) {
+    args <- c(args, "-no-demean")
+  }
+  if (covariance) {
+    args <- c(args, "-covariance")
+  }
 
   wb_cmd("-cifti-correlation", args, verbose = verbose)
 }

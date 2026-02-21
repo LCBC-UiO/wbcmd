@@ -22,8 +22,13 @@
 #' }
 #'
 #' @export
-wb_cmd <- function(cmd, args = character(), ..., verbose = get_wb_verbosity(),
-                   intern = verbose) {
+wb_cmd <- function(
+  cmd,
+  args = character(),
+  ...,
+  verbose = get_wb_verbosity(),
+  intern = verbose
+) {
   validate_wb_env()
 
   wb_path <- get_wb_path()
@@ -34,13 +39,11 @@ wb_cmd <- function(cmd, args = character(), ..., verbose = get_wb_verbosity(),
     wb_inform("Running: {.code {full_cmd}}")
   }
 
-  res <- try_wb_cmd(
+  try_wb_cmd(
     full_cmd,
     intern = intern,
     verbose = verbose
   )
-
-  res
 }
 
 #' Execute a workbench system command

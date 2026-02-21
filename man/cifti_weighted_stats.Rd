@@ -50,3 +50,7 @@ cifti_weighted_stats("data.dscalar.nii", operation = "MEAN",
 }
 
 }
+\section{Connectome Workbench Help}{
+\Sexpr[results=rd,stage=render]{wbcmd::wb_help_rd("-cifti-weighted-stats")}
+}
+
