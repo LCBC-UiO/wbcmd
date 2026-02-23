@@ -35,9 +35,9 @@ surface_generate_inflated <- function(
   very_inflated_out <- validate_outfile(very_inflated_out, ext = ".surf.gii")
 
   args <- c(
-    shQuote(anatomical_surface),
-    shQuote(inflated_out),
-    shQuote(very_inflated_out)
+    anatomical_surface,
+    inflated_out,
+    very_inflated_out
   )
 
   if (!is.null(iterations_scale)) {

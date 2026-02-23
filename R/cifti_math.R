@@ -34,11 +34,11 @@ cifti_math <- function(
 ) {
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
 
-  args <- c(shQuote(expression), shQuote(cifti_out))
+  args <- c(expression, cifti_out)
 
   for (nm in names(var)) {
     check_path(var[[nm]], arg = nm)
-    args <- c(args, "-var", shQuote(nm), shQuote(var[[nm]]))
+    args <- c(args, "-var", nm, var[[nm]])
   }
 
   if (fixnan) {

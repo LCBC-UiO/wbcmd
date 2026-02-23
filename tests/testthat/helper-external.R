@@ -16,9 +16,10 @@ capture_wb_cmd <- function(.env = rlang::caller_env()) {
   local_mocked_bindings(
     validate_wb_env = function(...) invisible(TRUE),
     get_wb_path = function(...) "/mock/wb_command",
-    try_wb_cmd = function(cmd, ...) {
-      captured$cmd <- cmd
-      captured$args <- list(...)
+    try_wb_cmd = function(command, args = character(), ...) {
+      captured$command <- command
+      captured$args <- args
+      captured$cmd <- paste(c(command, args), collapse = " ")
       ""
     },
     .env = .env
@@ -29,7 +30,7 @@ capture_wb_cmd <- function(.env = rlang::caller_env()) {
 create_test_sphere <- function(n_vertices = 100, dir = tempdir()) {
   skip_if_no_wb()
   path <- file.path(dir, "test_sphere.surf.gii")
-  wb_cmd("-surface-create-sphere", c(n_vertices, shQuote(path)),
+  wb_cmd("-surface-create-sphere", c(n_vertices, path),
          verbose = FALSE, intern = TRUE)
   path
 }

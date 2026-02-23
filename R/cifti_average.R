@@ -30,10 +30,10 @@ cifti_average <- function(
   batch_file_exists(cifti_in, arg = "cifti_in")
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
 
-  args <- shQuote(cifti_out)
+  args <- cifti_out
 
   for (i in seq_along(cifti_in)) {
-    args <- c(args, "-cifti", shQuote(cifti_in[[i]]))
+    args <- c(args, "-cifti", cifti_in[[i]])
     if (!is.null(weights)) {
       args <- c(args, "-weight", weights[[i]])
     }

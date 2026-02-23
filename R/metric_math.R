@@ -32,11 +32,11 @@ metric_math <- function(
 ) {
   metric_out <- validate_outfile(metric_out, ext = ".func.gii")
 
-  args <- c(shQuote(expression), shQuote(metric_out))
+  args <- c(expression, metric_out)
 
   for (nm in names(var)) {
     check_path(var[[nm]], arg = nm)
-    args <- c(args, "-var", shQuote(nm), shQuote(var[[nm]]))
+    args <- c(args, "-var", nm, var[[nm]])
   }
 
   if (fixnan) {

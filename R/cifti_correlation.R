@@ -38,15 +38,15 @@ cifti_correlation <- function(
   check_path(cifti_in, arg = "cifti_in")
   cifti_out <- validate_outfile(cifti_out, ext = ".dconn.nii")
 
-  args <- c(shQuote(cifti_in), shQuote(cifti_out))
+  args <- c(cifti_in, cifti_out)
 
   if (!is.null(roi_override)) {
     check_path(roi_override, arg = "roi_override")
-    args <- c(args, "-roi-override", shQuote(roi_override))
+    args <- c(args, "-roi-override", roi_override)
   }
   if (!is.null(weights)) {
     check_path(weights, arg = "weights")
-    args <- c(args, "-weights", shQuote(weights))
+    args <- c(args, "-weights", weights)
   }
   if (fisher_z) {
     args <- c(args, "-fisher-z")

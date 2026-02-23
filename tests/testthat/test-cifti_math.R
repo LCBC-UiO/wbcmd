@@ -16,8 +16,8 @@ describe("cifti_math()", {
 
     expect_match(captured$cmd, "-cifti-math")
     expect_match(captured$cmd, "\\(x \\+ y\\) / 2")
-    expect_match(captured$cmd, "-var 'x'")
-    expect_match(captured$cmd, "-var 'y'")
+    expect_match(captured$cmd, "-var x")
+    expect_match(captured$cmd, "-var y")
   })
 
   it("adds fixnan flag", {

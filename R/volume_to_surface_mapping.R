@@ -50,7 +50,7 @@ volume_to_surface_mapping <- function(
   method <- match.arg(method)
   metric_out <- validate_outfile(metric_out, ext = ".func.gii")
 
-  args <- c(shQuote(volume_in), shQuote(surface), shQuote(metric_out))
+  args <- c(volume_in, surface, metric_out)
 
   if (method %in% c("ribbon-constrained", "myelin-style")) {
     check_path(inner_surface, arg = "inner_surface")
@@ -58,8 +58,8 @@ volume_to_surface_mapping <- function(
     args <- c(
       args,
       paste0("-", method),
-      shQuote(inner_surface),
-      shQuote(outer_surface)
+      inner_surface,
+      outer_surface
     )
   } else {
     args <- c(args, paste0("-", method))

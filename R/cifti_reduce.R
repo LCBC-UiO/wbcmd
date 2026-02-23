@@ -39,7 +39,7 @@ cifti_reduce <- function(
   direction <- match.arg(direction)
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
 
-  args <- c(shQuote(cifti_in), operation, direction, shQuote(cifti_out))
+  args <- c(cifti_in, operation, direction, cifti_out)
 
   if (only_numeric) {
     args <- c(args, "-only-numeric")

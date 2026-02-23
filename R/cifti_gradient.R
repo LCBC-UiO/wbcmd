@@ -43,15 +43,15 @@ cifti_gradient <- function(
   direction <- match.arg(direction)
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
 
-  args <- c(shQuote(cifti_in), direction, shQuote(cifti_out))
+  args <- c(cifti_in, direction, cifti_out)
 
   if (!is.null(left_surface)) {
     check_path(left_surface, arg = "left_surface")
-    args <- c(args, "-left-surface", shQuote(left_surface))
+    args <- c(args, "-left-surface", left_surface)
   }
   if (!is.null(right_surface)) {
     check_path(right_surface, arg = "right_surface")
-    args <- c(args, "-right-surface", shQuote(right_surface))
+    args <- c(args, "-right-surface", right_surface)
   }
   if (!is.null(surface_presmooth)) {
     args <- c(args, "-surface-presmooth", surface_presmooth)

@@ -34,7 +34,7 @@ metric_stats <- function(
 ) {
   check_path(metric_in, arg = "metric_in")
 
-  args <- shQuote(metric_in)
+  args <- metric_in
 
   if (!is.null(operation)) {
     args <- c(args, "-reduce", operation)
@@ -47,7 +47,7 @@ metric_stats <- function(
   }
   if (!is.null(roi)) {
     check_path(roi, arg = "roi")
-    args <- c(args, "-roi", shQuote(roi))
+    args <- c(args, "-roi", roi)
   }
   if (show_map_name) {
     args <- c(args, "-show-map-name")

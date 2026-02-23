@@ -46,20 +46,20 @@ cifti_dilate <- function(
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
 
   args <- c(
-    shQuote(cifti_in),
+    cifti_in,
     direction,
     surface_distance,
     volume_distance,
-    shQuote(cifti_out)
+    cifti_out
   )
 
   if (!is.null(left_surface)) {
     check_path(left_surface, arg = "left_surface")
-    args <- c(args, "-left-surface", shQuote(left_surface))
+    args <- c(args, "-left-surface", left_surface)
   }
   if (!is.null(right_surface)) {
     check_path(right_surface, arg = "right_surface")
-    args <- c(args, "-right-surface", shQuote(right_surface))
+    args <- c(args, "-right-surface", right_surface)
   }
   if (nearest) {
     args <- c(args, "-nearest")

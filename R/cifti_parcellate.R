@@ -46,10 +46,10 @@ cifti_parcellate <- function(
   cifti_out <- validate_outfile(cifti_out, ext = ".ptseries.nii")
 
   args <- c(
-    shQuote(cifti_in),
-    shQuote(cifti_label),
+    cifti_in,
+    cifti_label,
     direction,
-    shQuote(cifti_out)
+    cifti_out
   )
 
   if (!is.null(spatial_weights)) {
@@ -59,7 +59,7 @@ cifti_parcellate <- function(
         args,
         "-spatial-weights",
         "-cifti-weights",
-        shQuote(spatial_weights$cifti_weights)
+        spatial_weights$cifti_weights
       )
     } else if (!is.null(spatial_weights$left_area_surf)) {
       check_path(spatial_weights$left_area_surf)
@@ -68,9 +68,9 @@ cifti_parcellate <- function(
         args,
         "-spatial-weights",
         "-left-area-surface",
-        shQuote(spatial_weights$left_area_surf),
+        spatial_weights$left_area_surf,
         "-right-area-surface",
-        shQuote(spatial_weights$right_area_surf)
+        spatial_weights$right_area_surf
       )
     }
   }

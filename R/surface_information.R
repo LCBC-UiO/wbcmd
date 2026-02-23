@@ -20,7 +20,7 @@ surface_information <- function(surface_in, verbose = get_wb_verbosity()) {
 
        wb_cmd(
               "-surface-information",
-              shQuote(surface_in),
+              surface_in,
               verbose = verbose,
               intern = TRUE
        )

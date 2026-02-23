@@ -33,14 +33,15 @@ wb_cmd <- function(
 
   wb_path <- get_wb_path()
   all_args <- c(cmd, args)
-  full_cmd <- paste(c(shQuote(wb_path), all_args), collapse = " ")
 
   if (verbose) {
+    full_cmd <- paste(c(shQuote(wb_path), all_args), collapse = " ")
     wb_inform("Running: {.code {full_cmd}}")
   }
 
   try_wb_cmd(
-    full_cmd,
+    wb_path,
+    all_args,
     intern = intern,
     verbose = verbose
   )
@@ -48,20 +49,19 @@ wb_cmd <- function(
 
 #' Execute a workbench system command
 #'
-#' @param cmd Full command string to execute.
+#' @param command Path to the wb_command executable.
+#' @param args Character vector of arguments.
 #' @param intern Capture output?
 #' @param verbose Show output?
-#' @param ... Additional arguments passed to [system()].
 #'
 #' @return Command output or exit status.
 #' @noRd
-try_wb_cmd <- function(cmd, intern = TRUE, verbose = TRUE, ...) {
-  res <- system(
-    cmd,
-    intern = intern,
-    ignore.stdout = !verbose && !intern,
-    ignore.stderr = !verbose,
-    ...
+try_wb_cmd <- function(command, args = character(), intern = TRUE,
+                       verbose = TRUE) {
+  system2(
+    command,
+    args = args,
+    stdout = if (intern) TRUE else if (verbose) "" else FALSE,
+    stderr = if (verbose) "" else FALSE
   )
-  res
 }

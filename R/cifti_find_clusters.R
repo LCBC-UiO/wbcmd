@@ -52,22 +52,22 @@ cifti_find_clusters <- function(
   cifti_out <- validate_outfile(cifti_out, ext = ".dscalar.nii")
 
   args <- c(
-    shQuote(cifti_in),
+    cifti_in,
     surface_value_threshold,
     surface_minimum_area,
     volume_value_threshold,
     volume_minimum_size,
     direction,
-    shQuote(cifti_out)
+    cifti_out
   )
 
   if (!is.null(left_surface)) {
     check_path(left_surface, arg = "left_surface")
-    args <- c(args, "-left-surface", shQuote(left_surface))
+    args <- c(args, "-left-surface", left_surface)
   }
   if (!is.null(right_surface)) {
     check_path(right_surface, arg = "right_surface")
-    args <- c(args, "-right-surface", shQuote(right_surface))
+    args <- c(args, "-right-surface", right_surface)
   }
   if (less_than) {
     args <- c(args, "-less-than")

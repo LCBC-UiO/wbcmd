@@ -37,21 +37,21 @@ cifti_weighted_stats <- function(
 ) {
   check_path(cifti_in, arg = "cifti_in")
 
-  args <- shQuote(cifti_in)
+  args <- cifti_in
 
   if (spatial_weights) {
     args <- c(args, "-spatial-weights")
   }
   if (!is.null(cifti_weights)) {
     check_path(cifti_weights, arg = "cifti_weights")
-    args <- c(args, "-cifti-weights", shQuote(cifti_weights))
+    args <- c(args, "-cifti-weights", cifti_weights)
   }
   if (!is.null(column)) {
     args <- c(args, "-column", column)
   }
   if (!is.null(roi)) {
     check_path(roi, arg = "roi")
-    args <- c(args, "-roi", shQuote(roi))
+    args <- c(args, "-roi", roi)
   }
 
   if (!is.null(operation)) {

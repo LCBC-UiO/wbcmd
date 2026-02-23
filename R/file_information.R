@@ -30,7 +30,7 @@ file_information <- function(
 ) {
   check_path(data_file, arg = "data_file")
 
-  args <- shQuote(data_file)
+  args <- data_file
 
   if (only_map_names) {
     args <- c(args, "-only-map-names")

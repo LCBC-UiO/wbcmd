@@ -34,7 +34,7 @@ cifti_stats <- function(
 ) {
   check_path(cifti_in, arg = "cifti_in")
 
-  args <- shQuote(cifti_in)
+  args <- cifti_in
 
   if (!is.null(operation)) {
     args <- c(args, "-reduce", operation)
@@ -47,7 +47,7 @@ cifti_stats <- function(
   }
   if (!is.null(roi)) {
     check_path(roi, arg = "roi")
-    args <- c(args, "-roi", shQuote(roi))
+    args <- c(args, "-roi", roi)
   }
   if (show_map_name) {
     args <- c(args, "-show-map-name")

@@ -32,11 +32,11 @@ volume_math <- function(
 ) {
   volume_out <- validate_outfile(volume_out, ext = ".nii.gz")
 
-  args <- c(shQuote(expression), shQuote(volume_out))
+  args <- c(expression, volume_out)
 
   for (nm in names(var)) {
     check_path(var[[nm]], arg = nm)
-    args <- c(args, "-var", shQuote(nm), shQuote(var[[nm]]))
+    args <- c(args, "-var", nm, var[[nm]])
   }
 
   if (fixnan) {

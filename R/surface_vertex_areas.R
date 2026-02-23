@@ -27,7 +27,7 @@ surface_vertex_areas <- function(
   check_path(surface_in, arg = "surface_in")
   metric_out <- validate_outfile(metric_out, ext = ".func.gii")
 
-  args <- c(shQuote(surface_in), shQuote(metric_out))
+  args <- c(surface_in, metric_out)
 
   wb_cmd("-surface-vertex-areas", args, verbose = verbose)
 }

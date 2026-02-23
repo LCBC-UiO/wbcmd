@@ -10,7 +10,7 @@ describe("volume_math()", {
 
     expect_match(captured$cmd, "-volume-math")
     expect_match(captured$cmd, "x \\+ 1")
-    expect_match(captured$cmd, "-var 'x'")
+    expect_match(captured$cmd, "-var x")
   })
 
   it("includes fixnan flag", {

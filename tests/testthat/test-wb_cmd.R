@@ -16,26 +16,26 @@ describe("wb_cmd()", {
   })
 
   it("passes args correctly", {
-    executed_cmd <- NULL
+    executed_args <- NULL
     local_mocked_bindings(
       validate_wb_env = function(...) invisible(TRUE),
       get_wb_path = function(...) "/fake/wb_command",
-      try_wb_cmd = function(cmd, ...) {
-        executed_cmd <<- cmd
+      try_wb_cmd = function(command, args = character(), ...) {
+        executed_args <<- args
         ""
       }
     )
 
     wb_cmd("-cifti-info", c("input.nii"), verbose = FALSE, intern = TRUE)
-    expect_match(executed_cmd, "-cifti-info")
-    expect_match(executed_cmd, "input.nii")
+    expect_true("-cifti-info" %in% executed_args)
+    expect_true("input.nii" %in% executed_args)
   })
 
   it("informs when verbose = TRUE", {
     local_mocked_bindings(
       validate_wb_env = function(...) invisible(TRUE),
       get_wb_path = function(...) "/fake/wb_command",
-      try_wb_cmd = function(cmd, ...) ""
+      try_wb_cmd = function(command, ...) ""
     )
 
     expect_message(
@@ -49,7 +49,8 @@ describe("try_wb_cmd()", {
   it("captures output when intern = TRUE", {
     skip_if_no_wb()
     result <- try_wb_cmd(
-      paste(shQuote(get_wb_path()), "-version"),
+      get_wb_path(),
+      args = "-version",
       intern = TRUE
     )
     expect_type(result, "character")

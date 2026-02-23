@@ -10,7 +10,7 @@ describe("metric_math()", {
 
     expect_match(captured$cmd, "-metric-math")
     expect_match(captured$cmd, "x \\* 2")
-    expect_match(captured$cmd, "-var 'x'")
+    expect_match(captured$cmd, "-var x")
   })
 
   it("includes fixnan flag", {

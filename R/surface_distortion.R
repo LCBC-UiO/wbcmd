@@ -41,9 +41,9 @@ surface_distortion <- function(
   metric_out <- validate_outfile(metric_out, ext = ".func.gii")
 
   args <- c(
-    shQuote(surface_reference),
-    shQuote(surface_distorted),
-    shQuote(metric_out)
+    surface_reference,
+    surface_distorted,
+    metric_out
   )
 
   if (!is.null(smooth)) {

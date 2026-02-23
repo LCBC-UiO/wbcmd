@@ -19,9 +19,8 @@ wb_help <- function(cmd = NULL) {
 
   wb_path <- get_wb_path()
   args <- if (is.null(cmd)) character() else cmd
-  full_cmd <- paste(c(shQuote(wb_path), args), collapse = " ")
 
-  res <- try_wb_cmd(full_cmd, intern = TRUE, verbose = FALSE)
+  res <- try_wb_cmd(wb_path, args, intern = TRUE, verbose = FALSE)
   cat(res, sep = "\n")
   invisible(res)
 }
@@ -52,8 +51,7 @@ wb_help_rd <- function(cmd) {
   help_text <- tryCatch(
     {
       wb_path <- get_wb_path()
-      full_cmd <- paste(c(shQuote(wb_path), cmd), collapse = " ")
-      suppressWarnings(try_wb_cmd(full_cmd, intern = TRUE, verbose = FALSE))
+      suppressWarnings(try_wb_cmd(wb_path, cmd, intern = TRUE, verbose = FALSE))
     },
     error = function(e) NULL
   )

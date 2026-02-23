@@ -28,15 +28,15 @@ surface_curvature <- function(
 ) {
   check_path(surface_in, arg = "surface_in")
 
-  args <- shQuote(surface_in)
+  args <- surface_in
 
   if (!is.null(mean_out)) {
     mean_out <- validate_outfile(mean_out, ext = ".func.gii")
-    args <- c(args, "-mean", shQuote(mean_out))
+    args <- c(args, "-mean", mean_out)
   }
   if (!is.null(gauss_out)) {
     gauss_out <- validate_outfile(gauss_out, ext = ".func.gii")
-    args <- c(args, "-gauss", shQuote(gauss_out))
+    args <- c(args, "-gauss", gauss_out)
   }
 
   wb_cmd("-surface-curvature", args, verbose = verbose)
