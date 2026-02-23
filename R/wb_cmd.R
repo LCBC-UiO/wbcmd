@@ -35,7 +35,7 @@ wb_cmd <- function(
   all_args <- c(cmd, args)
 
   if (verbose) {
-    full_cmd <- paste(c(shQuote(wb_path), all_args), collapse = " ")
+    full_cmd <- paste(c(shQuote(wb_path), shQuote(all_args)), collapse = " ")
     wb_inform("Running: {.code {full_cmd}}")
   }
 
@@ -60,7 +60,7 @@ try_wb_cmd <- function(command, args = character(), intern = TRUE,
                        verbose = TRUE) {
   system2(
     command,
-    args = args,
+    args = shQuote(args),
     stdout = if (intern) TRUE else if (verbose) "" else FALSE,
     stderr = if (verbose) "" else FALSE
   )
