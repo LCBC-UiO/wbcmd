@@ -9,6 +9,7 @@ reference:
     contents:
       - wb_cmd
       - wb_help
+      - wb_help_rd
       - check_wb_result
 
   - title: "Environment setup"
