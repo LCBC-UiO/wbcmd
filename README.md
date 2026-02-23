@@ -10,6 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/lcbc-uio/wbcmd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/lcbc-uio/wbcmd/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/lcbc-uio/wbcmd/graph/badge.svg)](https://app.codecov.io/gh/lcbc-uio/wbcmd)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/wbcmd)](https://CRAN.R-project.org/package=wbcmd)
 <!-- badges: end -->
 
 wbcmd provides R wrapper functions for the [Connectome
