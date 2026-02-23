@@ -46,6 +46,11 @@ file_information(
 
 Character vector of information lines, invisibly.
 
+## Connectome Workbench Help
+
+Connectome Workbench is not installed. Run
+`wb_help("-file-information")` in a session with wb_command available.
+
 ## Examples
 
 ``` r

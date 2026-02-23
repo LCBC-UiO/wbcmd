@@ -54,6 +54,11 @@ metric_stats(
 
 Character vector of output lines (stats values).
 
+## Connectome Workbench Help
+
+Connectome Workbench is not installed. Run `wb_help("-metric-stats")` in
+a session with wb_command available.
+
 ## Examples
 
 ``` r

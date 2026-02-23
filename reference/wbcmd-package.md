@@ -3,11 +3,15 @@
 Provides R wrapper functions for the 'Connectome Workbench' command-line
 tool ('wb_command'). Includes a central dispatcher for executing
 workbench commands, environment detection, and convenience wrappers for
-common operations on CIFTI, GIFTI, and surface files.
+common operations on Connectivity Informatics Technology Initiative
+(CIFTI), Geometry Informatics Technology Initiative (GIFTI), and surface
+files.
 
 ## See also
 
 Useful links:
+
+- <https://lcbc-uio.github.io/wbcmd/>
 
 - <https://github.com/lcbc-uio/wbcmd>
 
@@ -16,4 +20,4 @@ Useful links:
 ## Author
 
 **Maintainer**: Athanasia Mo Mowinckel <a.m.mowinckel@psykologi.uio.no>
-([ORCID](https://orcid.org/0000-0002-5756-0223))
+([ORCID](https://orcid.org/0000-0002-5756-0223)) \[copyright holder\]

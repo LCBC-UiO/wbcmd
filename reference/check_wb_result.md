@@ -41,3 +41,10 @@ check_wb_result(
 ## Value
 
 `res`, invisibly.
+
+## Examples
+
+``` r
+check_wb_result(0L, fe_before = FALSE, fe_after = TRUE,
+                outfile = "out.nii", cmd_name = "test")
+```

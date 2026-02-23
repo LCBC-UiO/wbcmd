@@ -72,6 +72,12 @@ cifti_find_clusters(
 The result of the underlying
 [`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md) call.
 
+## Connectome Workbench Help
+
+Connectome Workbench is not installed. Run
+`wb_help("-cifti-find-clusters")` in a session with wb_command
+available.
+
 ## Examples
 
 ``` r

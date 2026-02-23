@@ -1,81 +1,70 @@
 # Getting started with wbcmd
 
-wbcmd wraps the [Connectome
-Workbench](https://www.humanconnectome.org/software/connectome-workbench)
-`wb_command` CLI for use in R. Every function calls the same central
-dispatcher, so your environment only needs to be configured once.
+If you work with neuroimaging data in R, you’ve probably typed out a
+[`system()`](https://rdrr.io/r/base/system.html) call to `wb_command` at
+some point. Maybe you wrapped it in a helper function. Maybe that helper
+grew. wbcmd is the version of that helper that validates your inputs,
+finds your binary, and gets out of the way.
 
-## Prerequisites
+## Finding the binary
 
-Install Connectome Workbench from the [HCP
-website](https://www.humanconnectome.org/software/connectome-workbench).
-Then load the package and verify your setup:
+Install [Connectome
+Workbench](https://www.humanconnectome.org/software/connectome-workbench),
+then load the package:
 
 ``` r
 library(wbcmd)
 wb_sitrep()
 ```
 
-If the binary is not detected automatically, point wbcmd to it:
+[`wb_sitrep()`](https://lcbc-uio.github.io/wbcmd/reference/wb_sitrep.md)
+checks whether the binary is reachable and prints what it finds. On
+macOS and Linux, wbcmd searches common installation paths and the system
+`PATH` automatically.
+
+If the binary lives somewhere unusual, tell wbcmd where:
 
 ``` r
 set_wb_path("/opt/workbench/bin_linux64/wb_command")
 ```
 
-You can also set the path via environment variable or R option. The
-lookup order is:
+The full lookup order is:
 
 1.  R option `wbcmd.path`
 2.  Environment variable `WB_PATH`
-3.  Platform-specific defaults
+3.  Platform-specific defaults (e.g. `/Applications/wb_view.app/...` on
+    macOS)
 4.  System `PATH`
 
-## Running commands
+Set `WB_PATH` in your `.Renviron` and you never think about it again.
 
-The [`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md)
-function is the universal entry point. Pass the subcommand name and
-arguments exactly as you would on the command line:
+## The direct route
+
+[`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md) is
+the universal entry point. It takes the subcommand name and arguments
+exactly as you would type them on the command line:
 
 ``` r
 wb_cmd("-version")
-wb_cmd("-file-information", c("data.dscalar.nii"))
+wb_cmd("-file-information", "data.dscalar.nii")
 ```
 
-## Convenience wrappers
+Every wrapper function in wbcmd calls
+[`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md)
+internally. If a wrapper doesn’t exist for the command you need,
+[`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md)
+always works.
 
-Typed wrappers handle argument construction and file validation for you.
+## Wrappers
 
-### Separate a CIFTI file
+The wrappers handle argument construction, file validation, and output
+path management. They error before the command runs if an input file is
+missing, and they create output directories on the fly.
 
-``` r
-wb_cifti_separate(
-  "data.dscalar.nii",
-  direction = "COLUMN",
-  metric = list(
-    CORTEX_LEFT = "left.func.gii",
-    CORTEX_RIGHT = "right.func.gii"
-  )
-)
-```
-
-### Smooth CIFTI data
+### Parcellate CIFTI data
 
 ``` r
-wb_cifti_smoothing(
-  "data.dtseries.nii",
-  surface_sigma = 4,
-  volume_sigma = 4,
-  direction = "COLUMN",
-  cifti_out = "smoothed.dtseries.nii",
-  left_surface = "left.midthickness.surf.gii",
-  right_surface = "right.midthickness.surf.gii"
-)
-```
-
-### Parcellate
-
-``` r
-wb_cifti_parcellate(
+cifti_parcellate(
   "data.dtseries.nii",
   "atlas.dlabel.nii",
   direction = "COLUMN",
@@ -83,25 +72,129 @@ wb_cifti_parcellate(
 )
 ```
 
-### Resample a surface
+### Compute a correlation matrix
 
 ``` r
-wb_surface_resample(
-  "lh.pial.surf.gii",
-  "lh.sphere.32k.surf.gii",
-  "lh.sphere.164k.surf.gii",
-  method = "BARYCENTRIC",
-  surface_out = "lh.pial.164k.surf.gii"
+cifti_correlation(
+  "data.dtseries.nii",
+  "corr.dconn.nii",
+  fisher_z = TRUE
 )
 ```
 
+### Reduce across maps
+
+``` r
+cifti_reduce(
+  "data.dtseries.nii",
+  direction = "ROW",
+  operation = "MEAN",
+  cifti_out = "mean.dscalar.nii"
+)
+```
+
+### Surface curvature
+
+``` r
+surface_curvature(
+  "lh.midthickness.surf.gii",
+  mean_out = "lh.curvature.func.gii"
+)
+```
+
+### Map a volume to a surface
+
+``` r
+volume_to_surface_mapping(
+  "bold.nii.gz",
+  "lh.midthickness.surf.gii",
+  metric_out = "lh.bold.func.gii",
+  method = "ribbon-constrained",
+  inner_surface = "lh.white.surf.gii",
+  outer_surface = "lh.pial.surf.gii"
+)
+```
+
+### Math expressions
+
+[`cifti_math()`](https://lcbc-uio.github.io/wbcmd/reference/cifti_math.md),
+[`metric_math()`](https://lcbc-uio.github.io/wbcmd/reference/metric_math.md),
+and
+[`volume_math()`](https://lcbc-uio.github.io/wbcmd/reference/volume_math.md)
+all take a symbolic expression and a named list of file paths:
+
+``` r
+cifti_math(
+  "(x + y) / 2",
+  cifti_out = "average.dscalar.nii",
+  var = list(
+    x = "subj01.dscalar.nii",
+    y = "subj02.dscalar.nii"
+  )
+)
+```
+
+### Getting help
+
+Every wrapper function includes a “Connectome Workbench Help” section in
+its documentation, pulled directly from `wb_command` at build time. You
+can also call
+[`wb_help()`](https://lcbc-uio.github.io/wbcmd/reference/wb_help.md)
+interactively:
+
+``` r
+wb_help("-cifti-parcellate")
+```
+
+## Using wbcmd with ciftiTools
+
+[ciftiTools](https://github.com/mandymejia/ciftiTools) reads and writes
+CIFTI files as R objects. wbcmd runs Workbench operations on those
+files. They complement each other — ciftiTools gives you the data in R,
+wbcmd gives you the processing pipeline.
+
+Both packages need the same binary. Point them to the same path and they
+share the setup:
+
+``` r
+wb_path <- "/opt/workbench/bin_linux64/wb_command"
+
+wbcmd::set_wb_path(wb_path)
+ciftiTools::ciftiTools.setOption("wb_path", wb_path)
+```
+
+A typical workflow reads data with ciftiTools, processes files with
+wbcmd, then reads the results back:
+
+``` r
+library(ciftiTools)
+library(wbcmd)
+
+xii <- read_cifti("data.dtseries.nii", brainstructures = "all")
+
+cifti_parcellate(
+  "data.dtseries.nii",
+  "atlas.dlabel.nii",
+  direction = "COLUMN",
+  cifti_out = "parcellated.ptseries.nii"
+)
+
+parcellated <- read_cifti("parcellated.ptseries.nii")
+```
+
+ciftiTools also has its own `run_wb_cmd()` function that takes a
+pre-formatted command string. If you already use that, wbcmd’s
+[`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md) does
+the same job with the addition of path detection, argument quoting, and
+verbose logging.
+
 ## Controlling verbosity
 
-By default wbcmd prints each command before running it. Silence this
-with:
+By default, wbcmd prints the full command before running it. Turn that
+off for cleaner output:
 
 ``` r
 options(wbcmd.verbose = FALSE)
 ```
 
-Or set the `WB_VERBOSE` environment variable to `FALSE`.
+Or set `WB_VERBOSE=FALSE` in your `.Renviron`.

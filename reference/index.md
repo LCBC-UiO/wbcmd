@@ -8,6 +8,8 @@ Core dispatcher and command helpers
   Execute a Connectome Workbench command
 - [`wb_help()`](https://lcbc-uio.github.io/wbcmd/reference/wb_help.md) :
   Access wb_command help text
+- [`wb_help_rd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_help_rd.md)
+  : Render wb_command CLI help as Rd markup
 - [`check_wb_result()`](https://lcbc-uio.github.io/wbcmd/reference/check_wb_result.md)
   : Check the result of a workbench command
 

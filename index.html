@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Wrapper Functions for Connectome Workbench Commands">
-<meta name="description" content="Provides R wrapper functions for the Connectome Workbench command-line tool (wb_command). Includes a central dispatcher for executing workbench commands, environment detection, and convenience wrappers for common operations on CIFTI, GIFTI, and surface files.">
-<meta property="og:description" content="Provides R wrapper functions for the Connectome Workbench command-line tool (wb_command). Includes a central dispatcher for executing workbench commands, environment detection, and convenience wrappers for common operations on CIFTI, GIFTI, and surface files.">
+<meta name="description" content="Provides R wrapper functions for the Connectome Workbench command-line tool (wb_command). Includes a central dispatcher for executing workbench commands, environment detection, and convenience wrappers for common operations on Connectivity Informatics Technology Initiative (CIFTI), Geometry Informatics Technology Initiative (GIFTI), and surface files.">
+<meta property="og:description" content="Provides R wrapper functions for the Connectome Workbench command-line tool (wb_command). Includes a central dispatcher for executing workbench commands, environment detection, and convenience wrappers for common operations on Connectivity Informatics Technology Initiative (CIFTI), Geometry Informatics Technology Initiative (GIFTI), and surface files.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">wbcmd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,8 +56,11 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of wbcmd from <a href="https://github.com/lcbc-uio/wbcmd" class="external-link">GitHub</a> with:</p>
+<p>You can install wbcmd from CRAN with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"wbcmd"</span><span class="op">)</span></span></code></pre></div>
+<p>Or install the development version from <a href="https://github.com/lcbc-uio/wbcmd" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"lcbc-uio/wbcmd"</span><span class="op">)</span></span></code></pre></div>
 <p>You also need <a href="https://www.humanconnectome.org/software/connectome-workbench" class="external-link">Connectome Workbench</a> installed on your system.</p>
@@ -76,43 +79,37 @@
 </li>
 </ol>
 <p>Check your setup with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lcbc-uio/wbcmd" class="external-link">wbcmd</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lcbc-uio.github.io/wbcmd/">wbcmd</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/wb_sitrep.html">wb_sitrep</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>If <code>wb_command</code> is not found automatically, set the path explicitly:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/set_wb_path.html">set_wb_path</a></span><span class="op">(</span><span class="st">"/path/to/wb_command"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>All commands flow through the central <code><a href="reference/wb_cmd.html">wb_cmd()</a></code> dispatcher:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wb_cmd.html">wb_cmd</a></span><span class="op">(</span><span class="st">"-version"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/wb_cmd.html">wb_cmd</a></span><span class="op">(</span><span class="st">"-cifti-info"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.dscalar.nii"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Convenience wrappers provide a more ergonomic interface:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">wb_cifti_separate</span><span class="op">(</span></span>
-<span>  <span class="st">"data.dscalar.nii"</span>,</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/cifti_parcellate.html">cifti_parcellate</a></span><span class="op">(</span></span>
+<span>  <span class="st">"data.dtseries.nii"</span>,</span>
+<span>  <span class="st">"atlas.dlabel.nii"</span>,</span>
 <span>  direction <span class="op">=</span> <span class="st">"COLUMN"</span>,</span>
-<span>  metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    CORTEX_LEFT <span class="op">=</span> <span class="st">"left.func.gii"</span>,</span>
-<span>    CORTEX_RIGHT <span class="op">=</span> <span class="st">"right.func.gii"</span></span>
-<span>  <span class="op">)</span></span>
+<span>  cifti_out <span class="op">=</span> <span class="st">"parcellated.ptseries.nii"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">wb_cifti_smoothing</span><span class="op">(</span></span>
+<span><span class="fu"><a href="reference/cifti_correlation.html">cifti_correlation</a></span><span class="op">(</span></span>
 <span>  <span class="st">"data.dtseries.nii"</span>,</span>
-<span>  surface_sigma <span class="op">=</span> <span class="fl">4</span>,</span>
-<span>  volume_sigma <span class="op">=</span> <span class="fl">4</span>,</span>
-<span>  direction <span class="op">=</span> <span class="st">"COLUMN"</span>,</span>
-<span>  cifti_out <span class="op">=</span> <span class="st">"smoothed.dtseries.nii"</span>,</span>
-<span>  left_surface <span class="op">=</span> <span class="st">"left.midthickness.surf.gii"</span>,</span>
-<span>  right_surface <span class="op">=</span> <span class="st">"right.midthickness.surf.gii"</span></span>
+<span>  <span class="st">"corr.dconn.nii"</span>,</span>
+<span>  fisher_z <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Get help for any subcommand:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/wb_help.html">wb_help</a></span><span class="op">(</span><span class="st">"-cifti-separate"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/wb_help.html">wb_help</a></span><span class="op">(</span><span class="st">"-cifti-parcellate"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -148,7 +145,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Athanasia Mo Mowinckel <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5756-0223" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Athanasia Mo Mowinckel <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-5756-0223" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 

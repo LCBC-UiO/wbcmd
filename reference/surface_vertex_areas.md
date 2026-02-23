@@ -28,6 +28,12 @@ surface_vertex_areas(surface_in, metric_out, verbose = get_wb_verbosity())
 The result of the underlying
 [`wb_cmd()`](https://lcbc-uio.github.io/wbcmd/reference/wb_cmd.md) call.
 
+## Connectome Workbench Help
+
+Connectome Workbench is not installed. Run
+`wb_help("-surface-vertex-areas")` in a session with wb_command
+available.
+
 ## Examples
 
 ``` r

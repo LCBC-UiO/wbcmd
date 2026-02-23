@@ -2,7 +2,7 @@
 
 ## Authors
 
-- **Athanasia Mo Mowinckel**. Author, maintainer.
+- **Athanasia Mo Mowinckel**. Author, maintainer, copyright holder.
   [](https://orcid.org/0000-0002-5756-0223)
 
 ## Citation

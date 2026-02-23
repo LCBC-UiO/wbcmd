@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">wbcmd</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,80 +60,63 @@
 
     
     
-<p>wbcmd wraps the <a href="https://www.humanconnectome.org/software/connectome-workbench" class="external-link">Connectome
-Workbench</a> <code>wb_command</code> CLI for use in R. Every function
-calls the same central dispatcher, so your environment only needs to be
-configured once.</p>
+<p>If you work with neuroimaging data in R, you’ve probably typed out a
+<code><a href="https://rdrr.io/r/base/system.html" class="external-link">system()</a></code> call to <code>wb_command</code> at some point.
+Maybe you wrapped it in a helper function. Maybe that helper grew. wbcmd
+is the version of that helper that validates your inputs, finds your
+binary, and gets out of the way.</p>
 <div class="section level2">
-<h2 id="prerequisites">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+<h2 id="finding-the-binary">Finding the binary<a class="anchor" aria-label="anchor" href="#finding-the-binary"></a>
 </h2>
-<p>Install Connectome Workbench from the <a href="https://www.humanconnectome.org/software/connectome-workbench" class="external-link">HCP
-website</a>. Then load the package and verify your setup:</p>
+<p>Install <a href="https://www.humanconnectome.org/software/connectome-workbench" class="external-link">Connectome
+Workbench</a>, then load the package:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lcbc-uio/wbcmd" class="external-link">wbcmd</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lcbc-uio.github.io/wbcmd/">wbcmd</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/wb_sitrep.html">wb_sitrep</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>If the binary is not detected automatically, point wbcmd to it:</p>
+<p><code><a href="../reference/wb_sitrep.html">wb_sitrep()</a></code> checks whether the binary is reachable and
+prints what it finds. On macOS and Linux, wbcmd searches common
+installation paths and the system <code>PATH</code> automatically.</p>
+<p>If the binary lives somewhere unusual, tell wbcmd where:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/set_wb_path.html">set_wb_path</a></span><span class="op">(</span><span class="st">"/opt/workbench/bin_linux64/wb_command"</span><span class="op">)</span></span></code></pre></div>
-<p>You can also set the path via environment variable or R option. The
-lookup order is:</p>
+<p>The full lookup order is:</p>
 <ol style="list-style-type: decimal">
 <li>R option <code>wbcmd.path</code>
 </li>
 <li>Environment variable <code>WB_PATH</code>
 </li>
-<li>Platform-specific defaults</li>
+<li>Platform-specific defaults
+(e.g. <code>/Applications/wb_view.app/...</code> on macOS)</li>
 <li>System <code>PATH</code>
 </li>
 </ol>
+<p>Set <code>WB_PATH</code> in your <code>.Renviron</code> and you never
+think about it again.</p>
 </div>
 <div class="section level2">
-<h2 id="running-commands">Running commands<a class="anchor" aria-label="anchor" href="#running-commands"></a>
+<h2 id="the-direct-route">The direct route<a class="anchor" aria-label="anchor" href="#the-direct-route"></a>
 </h2>
-<p>The <code><a href="../reference/wb_cmd.html">wb_cmd()</a></code> function is the universal entry point. Pass
-the subcommand name and arguments exactly as you would on the command
-line:</p>
+<p><code><a href="../reference/wb_cmd.html">wb_cmd()</a></code> is the universal entry point. It takes the
+subcommand name and arguments exactly as you would type them on the
+command line:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/wb_cmd.html">wb_cmd</a></span><span class="op">(</span><span class="st">"-version"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/wb_cmd.html">wb_cmd</a></span><span class="op">(</span><span class="st">"-file-information"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data.dscalar.nii"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/wb_cmd.html">wb_cmd</a></span><span class="op">(</span><span class="st">"-file-information"</span>, <span class="st">"data.dscalar.nii"</span><span class="op">)</span></span></code></pre></div>
+<p>Every wrapper function in wbcmd calls <code><a href="../reference/wb_cmd.html">wb_cmd()</a></code>
+internally. If a wrapper doesn’t exist for the command you need,
+<code><a href="../reference/wb_cmd.html">wb_cmd()</a></code> always works.</p>
 </div>
 <div class="section level2">
-<h2 id="convenience-wrappers">Convenience wrappers<a class="anchor" aria-label="anchor" href="#convenience-wrappers"></a>
+<h2 id="wrappers">Wrappers<a class="anchor" aria-label="anchor" href="#wrappers"></a>
 </h2>
-<p>Typed wrappers handle argument construction and file validation for
-you.</p>
+<p>The wrappers handle argument construction, file validation, and
+output path management. They error before the command runs if an input
+file is missing, and they create output directories on the fly.</p>
 <div class="section level3">
-<h3 id="separate-a-cifti-file">Separate a CIFTI file<a class="anchor" aria-label="anchor" href="#separate-a-cifti-file"></a>
+<h3 id="parcellate-cifti-data">Parcellate CIFTI data<a class="anchor" aria-label="anchor" href="#parcellate-cifti-data"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">wb_cifti_separate</span><span class="op">(</span></span>
-<span>  <span class="st">"data.dscalar.nii"</span>,</span>
-<span>  direction <span class="op">=</span> <span class="st">"COLUMN"</span>,</span>
-<span>  metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    CORTEX_LEFT <span class="op">=</span> <span class="st">"left.func.gii"</span>,</span>
-<span>    CORTEX_RIGHT <span class="op">=</span> <span class="st">"right.func.gii"</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="smooth-cifti-data">Smooth CIFTI data<a class="anchor" aria-label="anchor" href="#smooth-cifti-data"></a>
-</h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">wb_cifti_smoothing</span><span class="op">(</span></span>
-<span>  <span class="st">"data.dtseries.nii"</span>,</span>
-<span>  surface_sigma <span class="op">=</span> <span class="fl">4</span>,</span>
-<span>  volume_sigma <span class="op">=</span> <span class="fl">4</span>,</span>
-<span>  direction <span class="op">=</span> <span class="st">"COLUMN"</span>,</span>
-<span>  cifti_out <span class="op">=</span> <span class="st">"smoothed.dtseries.nii"</span>,</span>
-<span>  left_surface <span class="op">=</span> <span class="st">"left.midthickness.surf.gii"</span>,</span>
-<span>  right_surface <span class="op">=</span> <span class="st">"right.midthickness.surf.gii"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="parcellate">Parcellate<a class="anchor" aria-label="anchor" href="#parcellate"></a>
-</h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">wb_cifti_parcellate</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cifti_parcellate.html">cifti_parcellate</a></span><span class="op">(</span></span>
 <span>  <span class="st">"data.dtseries.nii"</span>,</span>
 <span>  <span class="st">"atlas.dlabel.nii"</span>,</span>
 <span>  direction <span class="op">=</span> <span class="st">"COLUMN"</span>,</span>
@@ -141,27 +124,118 @@ you.</p>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="resample-a-surface">Resample a surface<a class="anchor" aria-label="anchor" href="#resample-a-surface"></a>
+<h3 id="compute-a-correlation-matrix">Compute a correlation matrix<a class="anchor" aria-label="anchor" href="#compute-a-correlation-matrix"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">wb_surface_resample</span><span class="op">(</span></span>
-<span>  <span class="st">"lh.pial.surf.gii"</span>,</span>
-<span>  <span class="st">"lh.sphere.32k.surf.gii"</span>,</span>
-<span>  <span class="st">"lh.sphere.164k.surf.gii"</span>,</span>
-<span>  method <span class="op">=</span> <span class="st">"BARYCENTRIC"</span>,</span>
-<span>  surface_out <span class="op">=</span> <span class="st">"lh.pial.164k.surf.gii"</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cifti_correlation.html">cifti_correlation</a></span><span class="op">(</span></span>
+<span>  <span class="st">"data.dtseries.nii"</span>,</span>
+<span>  <span class="st">"corr.dconn.nii"</span>,</span>
+<span>  fisher_z <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level3">
+<h3 id="reduce-across-maps">Reduce across maps<a class="anchor" aria-label="anchor" href="#reduce-across-maps"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cifti_reduce.html">cifti_reduce</a></span><span class="op">(</span></span>
+<span>  <span class="st">"data.dtseries.nii"</span>,</span>
+<span>  direction <span class="op">=</span> <span class="st">"ROW"</span>,</span>
+<span>  operation <span class="op">=</span> <span class="st">"MEAN"</span>,</span>
+<span>  cifti_out <span class="op">=</span> <span class="st">"mean.dscalar.nii"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="surface-curvature">Surface curvature<a class="anchor" aria-label="anchor" href="#surface-curvature"></a>
+</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/surface_curvature.html">surface_curvature</a></span><span class="op">(</span></span>
+<span>  <span class="st">"lh.midthickness.surf.gii"</span>,</span>
+<span>  mean_out <span class="op">=</span> <span class="st">"lh.curvature.func.gii"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="map-a-volume-to-a-surface">Map a volume to a surface<a class="anchor" aria-label="anchor" href="#map-a-volume-to-a-surface"></a>
+</h3>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/volume_to_surface_mapping.html">volume_to_surface_mapping</a></span><span class="op">(</span></span>
+<span>  <span class="st">"bold.nii.gz"</span>,</span>
+<span>  <span class="st">"lh.midthickness.surf.gii"</span>,</span>
+<span>  metric_out <span class="op">=</span> <span class="st">"lh.bold.func.gii"</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"ribbon-constrained"</span>,</span>
+<span>  inner_surface <span class="op">=</span> <span class="st">"lh.white.surf.gii"</span>,</span>
+<span>  outer_surface <span class="op">=</span> <span class="st">"lh.pial.surf.gii"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="math-expressions">Math expressions<a class="anchor" aria-label="anchor" href="#math-expressions"></a>
+</h3>
+<p><code><a href="../reference/cifti_math.html">cifti_math()</a></code>, <code><a href="../reference/metric_math.html">metric_math()</a></code>, and
+<code><a href="../reference/volume_math.html">volume_math()</a></code> all take a symbolic expression and a named
+list of file paths:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cifti_math.html">cifti_math</a></span><span class="op">(</span></span>
+<span>  <span class="st">"(x + y) / 2"</span>,</span>
+<span>  cifti_out <span class="op">=</span> <span class="st">"average.dscalar.nii"</span>,</span>
+<span>  var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"subj01.dscalar.nii"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"subj02.dscalar.nii"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="getting-help">Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
+</h3>
+<p>Every wrapper function includes a “Connectome Workbench Help” section
+in its documentation, pulled directly from <code>wb_command</code> at
+build time. You can also call <code><a href="../reference/wb_help.html">wb_help()</a></code> interactively:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/wb_help.html">wb_help</a></span><span class="op">(</span><span class="st">"-cifti-parcellate"</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="using-wbcmd-with-ciftitools">Using wbcmd with ciftiTools<a class="anchor" aria-label="anchor" href="#using-wbcmd-with-ciftitools"></a>
+</h2>
+<p><a href="https://github.com/mandymejia/ciftiTools" class="external-link">ciftiTools</a>
+reads and writes CIFTI files as R objects. wbcmd runs Workbench
+operations on those files. They complement each other — ciftiTools gives
+you the data in R, wbcmd gives you the processing pipeline.</p>
+<p>Both packages need the same binary. Point them to the same path and
+they share the setup:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wb_path</span> <span class="op">&lt;-</span> <span class="st">"/opt/workbench/bin_linux64/wb_command"</span></span>
+<span></span>
+<span><span class="fu">wbcmd</span><span class="fu">::</span><span class="fu"><a href="../reference/set_wb_path.html">set_wb_path</a></span><span class="op">(</span><span class="va">wb_path</span><span class="op">)</span></span>
+<span><span class="fu">ciftiTools</span><span class="fu">::</span><span class="fu">ciftiTools.setOption</span><span class="op">(</span><span class="st">"wb_path"</span>, <span class="va">wb_path</span><span class="op">)</span></span></code></pre></div>
+<p>A typical workflow reads data with ciftiTools, processes files with
+wbcmd, then reads the results back:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mandymejia/ciftiTools" class="external-link">ciftiTools</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lcbc-uio.github.io/wbcmd/">wbcmd</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">xii</span> <span class="op">&lt;-</span> <span class="fu">read_cifti</span><span class="op">(</span><span class="st">"data.dtseries.nii"</span>, brainstructures <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/cifti_parcellate.html">cifti_parcellate</a></span><span class="op">(</span></span>
+<span>  <span class="st">"data.dtseries.nii"</span>,</span>
+<span>  <span class="st">"atlas.dlabel.nii"</span>,</span>
+<span>  direction <span class="op">=</span> <span class="st">"COLUMN"</span>,</span>
+<span>  cifti_out <span class="op">=</span> <span class="st">"parcellated.ptseries.nii"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">parcellated</span> <span class="op">&lt;-</span> <span class="fu">read_cifti</span><span class="op">(</span><span class="st">"parcellated.ptseries.nii"</span><span class="op">)</span></span></code></pre></div>
+<p>ciftiTools also has its own <code>run_wb_cmd()</code> function that
+takes a pre-formatted command string. If you already use that, wbcmd’s
+<code><a href="../reference/wb_cmd.html">wb_cmd()</a></code> does the same job with the addition of path
+detection, argument quoting, and verbose logging.</p>
 </div>
 <div class="section level2">
 <h2 id="controlling-verbosity">Controlling verbosity<a class="anchor" aria-label="anchor" href="#controlling-verbosity"></a>
 </h2>
-<p>By default wbcmd prints each command before running it. Silence this
-with:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>By default, wbcmd prints the full command before running it. Turn
+that off for cleaner output:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>wbcmd.verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p>Or set the <code>WB_VERBOSE</code> environment variable to
-<code>FALSE</code>.</p>
+<p>Or set <code>WB_VERBOSE=FALSE</code> in your
+<code>.Renviron</code>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

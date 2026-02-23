@@ -23,6 +23,12 @@ surface_information(surface_in, verbose = get_wb_verbosity())
 
 Character vector of information lines, invisibly.
 
+## Connectome Workbench Help
+
+Connectome Workbench is not installed. Run
+`wb_help("-surface-information")` in a session with wb_command
+available.
+
 ## Examples
 
 ``` r
