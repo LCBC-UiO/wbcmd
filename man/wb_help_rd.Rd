@@ -16,3 +16,9 @@ Character string of Rd markup.
 Called at render time by \verb{\\Sexpr} in generated .Rd files.
 Returns valid Rd markup showing CLI help or a fallback message.
 }
+\examples{
+\dontrun{
+wb_help_rd("-cifti-average")
+}
+
+}

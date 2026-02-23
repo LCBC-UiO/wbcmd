@@ -8,3 +8,5 @@
 ^\.github$
 ^codecov\.yml$
 ^WORDLIST$
+^cran-comments\.md$
+^\.claude$

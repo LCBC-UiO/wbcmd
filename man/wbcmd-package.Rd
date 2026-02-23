@@ -6,18 +6,19 @@
 \alias{wbcmd-package}
 \title{wbcmd: Wrapper Functions for 'Connectome Workbench' Commands}
 \description{
-Provides R wrapper functions for the 'Connectome Workbench' command-line tool ('wb_command'). Includes a central dispatcher for executing workbench commands, environment detection, and convenience wrappers for common operations on CIFTI, GIFTI, and surface files.
+Provides R wrapper functions for the 'Connectome Workbench' command-line tool ('wb_command'). Includes a central dispatcher for executing workbench commands, environment detection, and convenience wrappers for common operations on Connectivity Informatics Technology Initiative (CIFTI), Geometry Informatics Technology Initiative (GIFTI), and surface files.
 }
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://lcbc-uio.github.io/wbcmd/}
   \item \url{https://github.com/lcbc-uio/wbcmd}
   \item Report bugs at \url{https://github.com/lcbc-uio/wbcmd/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Athanasia Mo Mowinckel \email{a.m.mowinckel@psykologi.uio.no} (\href{https://orcid.org/0000-0002-5756-0223}{ORCID})
+\strong{Maintainer}: Athanasia Mo Mowinckel \email{a.m.mowinckel@psykologi.uio.no} (\href{https://orcid.org/0000-0002-5756-0223}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

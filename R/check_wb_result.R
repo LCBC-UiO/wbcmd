@@ -11,6 +11,10 @@
 #'
 #' @return `res`, invisibly.
 #'
+#' @examples
+#' check_wb_result(0L, fe_before = FALSE, fe_after = TRUE,
+#'                 outfile = "out.nii", cmd_name = "test")
+#'
 #' @export
 check_wb_result <- function(res,
                             fe_before = NA,

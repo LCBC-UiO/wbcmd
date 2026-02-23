@@ -34,6 +34,11 @@ wb_help <- function(cmd = NULL) {
 #'
 #' @return Character string of Rd markup.
 #'
+#' @examples
+#' \dontrun{
+#' wb_help_rd("-cifti-average")
+#' }
+#'
 #' @export
 wb_help_rd <- function(cmd) {
   if (!grepl("^-[a-z][a-z-]*$", cmd)) {

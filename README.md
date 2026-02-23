@@ -1,5 +1,4 @@
 
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # wbcmd
@@ -14,11 +13,18 @@ coverage](https://codecov.io/gh/lcbc-uio/wbcmd/graph/badge.svg)](https://app.cod
 <!-- badges: end -->
 
 wbcmd provides R wrapper functions for the [Connectome
-Workbench](https://www.humanconnectome.org/software/connectome-workbench) command-line tool (`wb_command`).
+Workbench](https://www.humanconnectome.org/software/connectome-workbench)
+command-line tool (`wb_command`).
 
 ## Installation
 
-You can install the development version of wbcmd from
+You can install wbcmd from CRAN with:
+
+``` r
+install.packages("wbcmd")
+```
+
+Or install the development version from
 [GitHub](https://github.com/lcbc-uio/wbcmd) with:
 
 ``` r
@@ -64,28 +70,22 @@ wb_cmd("-cifti-info", c("data.dscalar.nii"))
 Convenience wrappers provide a more ergonomic interface:
 
 ``` r
-wb_cifti_separate(
-  "data.dscalar.nii",
+cifti_parcellate(
+  "data.dtseries.nii",
+  "atlas.dlabel.nii",
   direction = "COLUMN",
-  metric = list(
-    CORTEX_LEFT = "left.func.gii",
-    CORTEX_RIGHT = "right.func.gii"
-  )
+  cifti_out = "parcellated.ptseries.nii"
 )
 
-wb_cifti_smoothing(
+cifti_correlation(
   "data.dtseries.nii",
-  surface_sigma = 4,
-  volume_sigma = 4,
-  direction = "COLUMN",
-  cifti_out = "smoothed.dtseries.nii",
-  left_surface = "left.midthickness.surf.gii",
-  right_surface = "right.midthickness.surf.gii"
+  "corr.dconn.nii",
+  fisher_z = TRUE
 )
 ```
 
 Get help for any subcommand:
 
 ``` r
-wb_help("-cifti-separate")
+wb_help("-cifti-parcellate")
 ```

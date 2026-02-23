@@ -1,14 +1,16 @@
 Package: wbcmd
 Title: Wrapper Functions for 'Connectome Workbench' Commands
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R:
     person("Athanasia Mo", "Mowinckel", , "a.m.mowinckel@psykologi.uio.no",
-           role = c("aut", "cre"),
+           role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-5756-0223"))
 Description: Provides R wrapper functions for the 'Connectome Workbench'
     command-line tool ('wb_command'). Includes a central dispatcher for
     executing workbench commands, environment detection, and convenience
-    wrappers for common operations on CIFTI, GIFTI, and surface files.
+    wrappers for common operations on Connectivity Informatics Technology
+    Initiative (CIFTI), Geometry Informatics Technology Initiative (GIFTI),
+    and surface files.
 License: MIT + file LICENSE
 URL: https://lcbc-uio.github.io/wbcmd/,
     https://github.com/lcbc-uio/wbcmd

@@ -58,10 +58,16 @@ wb_cmd <- function(
 #' @noRd
 try_wb_cmd <- function(command, args = character(), intern = TRUE,
                        verbose = TRUE) {
-  system2(
+  result <- system2(
     command,
     args = shQuote(args),
     stdout = if (intern) TRUE else if (verbose) "" else FALSE,
     stderr = if (verbose) "" else FALSE
   )
+
+  # wb_command creates a WbViewMovie directory as a side effect
+  wb_movie <- file.path(dirname(tempdir()), "WbViewMovie")
+  if (dir.exists(wb_movie)) unlink(wb_movie, recursive = TRUE)
+
+  result
 }

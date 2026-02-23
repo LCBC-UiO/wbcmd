@@ -1,4 +1,4 @@
-# wbcmd 0.0.0.9000
+# wbcmd 0.1.0
 
 * Initial package scaffold with core dispatcher architecture.
 * Added `wb_cmd()` central dispatcher for all `wb_command` operations.

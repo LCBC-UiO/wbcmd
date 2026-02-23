@@ -6,7 +6,9 @@
 #' @return A list of diagnostic information, invisibly.
 #'
 #' @examples
+#' \dontrun{
 #' wb_sitrep()
+#' }
 #'
 #' @export
 wb_sitrep <- function() {

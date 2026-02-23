@@ -30,3 +30,8 @@ check_wb_result(
 Validates the outcome of a \code{wb_command} execution by inspecting the
 exit status and whether the expected output file was produced.
 }
+\examples{
+check_wb_result(0L, fe_before = FALSE, fe_after = TRUE,
+                outfile = "out.nii", cmd_name = "test")
+
+}

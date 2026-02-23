@@ -14,6 +14,8 @@ Prints a diagnostic summary of the workbench environment, including
 path detection, version, and system information.
 }
 \examples{
+\dontrun{
 wb_sitrep()
+}
 
 }
